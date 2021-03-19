@@ -11,7 +11,7 @@ module.exports = {
     .setDescription('List všetkých príkazov Karot.')
     .addField('Moderačné', '`ban`, `kick`')
     .addField('Informačné', '`info`, `ping`, `help`, `serverinfo`')
-    .addField('Zábavné', '`cislo`, `meme`, `starterpack`, `minecraft`, `fortnite`, `status`, `duklock`, `mrkva`')
+    .addField('Zábavné', '`cislo`, `meme`, `starterpack`, `minecraft`, `fortnite`, `status`, `duklock`, `mrkva`, `siryakari`')
     .setFooter(`karot.xyz - ${Date.now() - message.createdTimestamp}ms`)
 message.channel.send(embed)
 .catch(error =>

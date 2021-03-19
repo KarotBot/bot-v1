@@ -17,6 +17,11 @@
 * **Oficiálny Discord server:** [9Byp7mWfMF](https://discord.com/invite/9Byp7mWfMF)
 * **Hlavný správca/vlastník bota:** [Slenky](https://github.com/Slenkston)
 
+## Kontríbucie
+
+Ak si prajete kontribuvať ku projektu budeme veľmi radi. <br>
+Za odmenu si môžete vyžiadať Discord rolu <a href="https://discord.com/invite/9Byp7mWfMF"><img src="https://i.imgur.com/OfceOG5.png" height="200" width="200"></a> takže určite sa pred kontribúciou pripojte na náš Discord server a do pull requestu špecifikujte svoje Discord meno a tag/diskriminátor alebo svoje Discord ID.
+
 ## Self hostovanie
 
 Self hostovanie bota nie je zakázané ale nebude dostávať žiadnu podporu v prípade problému a taktiež ho neodporúčame.

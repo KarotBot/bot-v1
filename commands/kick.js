@@ -6,7 +6,7 @@ module.exports = {
     async execute(message, args) {
           if(!message.member.hasPermission('KICK_MEMBERS'))
           if(!message.member.hasPermission('ADMINISTRATOR'))
-            return message.channel.send(`Nemáš permise!`)
+            return message.channel.send(`<:kt_pain:822491637023899678>︱Nemáš permisie!`)
         
           const user = message.mentions.users.first(); 
            
@@ -17,20 +17,20 @@ module.exports = {
               if (member) {
                 member.kick(`${message.author.tag} - ` + args.slice(1).join(" ")).then(() => {
                
-                  message.channel.send(`**Úspěšně** jsem kicknul **${user.tag}** z důvodu: ` + args.slice(1).join(" "))
+                  message.channel.send(`<:kt_pain:822491637023899678>︱**Úspešne** som vyhodil **${user.tag}** z dôvodu: ` + args.slice(1).join(" "))
                 }).catch(err => {
                  
-                  message.reply('Nemám permise!');
+                  message.reply('<:kt_pain:822491637023899678>︱Nemám permisie!');
                   
                   console.error(err);
                 });
               } else {
                
-                message.reply('Tento uživatel není na serveru!');
+                message.reply('Tento užívateľ nie je  na serveri!');
               }
          
             } else {
-              message.channel.send(`Vyber někoho, koho chceš vyhodit!`); 
+              message.channel.send(`Vyber niekoho koho chceš vyhodiť!`); 
             }
         
         

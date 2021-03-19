@@ -9,6 +9,7 @@ module.exports = {
         .setDescription(Math.floor(Math.random()*10001))
         .setTitle('Náhodné čislo')
         .setColor('#e54918')
+        .setFooter(`karot.xyz - ${Date.now() - message.createdTimestamp}ms`)
         message.channel.send(embed)
         .catch(error =>
               console.log("Nejaký čurák mi zobral permisie... >:0")

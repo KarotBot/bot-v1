@@ -19,7 +19,7 @@
 
 ## Kontríbucie
 
-Ak si prajete kontribuvať ku projektu budeme veľmi radi. <br>
+Ak si prajete kontributovať ku projektu budeme veľmi radi. <br>
 Za odmenu si môžete vyžiadať Discord rolu Octocat takže určite sa pred kontribúciou pripojte na náš [Discord server](https://discord.com/invite/9Byp7mWfMF) a do pull requestu špecifikujte svoje Discord meno a tag/diskriminátor alebo svoje Discord ID.
 
 ## Self hostovanie

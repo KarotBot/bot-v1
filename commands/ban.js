@@ -6,7 +6,7 @@ module.exports = {
     async execute(message, args) {
       if(!message.member.hasPermission("BAN_MEMBERS")) 
       if(!message.member.hasPermission("ADMINISTRATOR")) 
-      return message.channel.send(`Nemáš permise!`)
+      return message.channel.send(`<:kt_pain:822491637023899678>︱Nemáš permisie!`)
       
       const member = message.mentions.members.last() || message.guild.members.cache.get(args[0]);
       
@@ -19,9 +19,9 @@ module.exports = {
       
       if(member.roles.highest.position >= message.member.roles.highest.position) return message.channel.send(`Nemôžeš zabanovať väčšiu rolu ako máš ty/takú istú ako máš ty!`)
       
-      var msg = await message.channel.send(`**Úspěšně** jsem zabanoval **${member.user.tag}** z důvodu: `+args.slice(1).join(" "))
+      var msg = await message.channel.send(`<:kt_pain:822491637023899678>︱**Úspešne** som zabanoval **${user.tag}** z dôvodu: `+args.slice(1).join(" "))
       
       message.guild.members.ban(member, {reason: message.author.tag+" - "+args.slice(1).join(" ")}).catch(err => {
-        return msg.edit(`Nemám permise!`)
+        return msg.edit(`<:kt_pain:822491637023899678>︱Nemáš permisie!`)
       })
     }}

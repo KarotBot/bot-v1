@@ -1,0 +1,19 @@
+{
+  "name": "karot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "karot",
+    "discord",
+    "bot"
+  ],
+  "author": "Slenky",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^12.5.1"
+  }
+}

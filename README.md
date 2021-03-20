@@ -12,7 +12,7 @@
 
 ## Dôležité informácie
 
-* **Prefix:** .k <br>
+* **Prefix:** k! <br>
 * **Webstránky:** www.karot.xyz
 * **Oficiálny Discord server:** [9Byp7mWfMF](https://discord.com/invite/9Byp7mWfMF)
 * **Hlavný správca/vlastník bota:** [Slenky](https://github.com/Slenkston)

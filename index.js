@@ -13,7 +13,7 @@ for (const file of commandFiles) {
 
 client.on("ready", () => {
   console.log("Zapínam sa... (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧ ✧ﾟ･: *ヽ(◕ヮ◕ヽ)")
-  client.user.setActivity(`.k help`, { type: 2});
+  client.user.setActivity(`k! help`, { type: 2});
   console.log("Status úspešne načítaný! (▀̿Ĺ̯▀̿ ̿)")
 });
 

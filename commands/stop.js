@@ -6,7 +6,7 @@ module.exports = {
     description: 'Vypne ma D:',
     async execute(message, args) {
         if (message.author.id !== '403500416631046145') {
-            return message.channel.send(`**Nemôžeš použiť tento príkaz.** Neskús ma vypnúť ty čurák jeden.`)
+            return message.channel.send(`**Nemôžeš použiť tento príkaz.**`)
         }
         var embed = new Discord.MessageEmbed()
         .setColor('#660000')

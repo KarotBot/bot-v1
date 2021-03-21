@@ -14,6 +14,7 @@ module.exports = {
            
               const member = message.guild.member(user);
               if(member.user.id === message.author.id) return message.channel.send(`Nemůžeš kicknout sám sebe!`)  
+              if(member.user.id === "822391645697212416") return message.channel.send(`Nemôžem kicknúť seba. D:`)
               if (member) {
                 member.kick(`${message.author.tag} - ` + args.slice(1).join(" ")).then(() => {
                

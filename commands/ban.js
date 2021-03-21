@@ -16,6 +16,8 @@ module.exports = {
       if(!reason) reason = 'Nebyl uveden důvod banu.'
       
       if(member.user.id === message.author.id) return message.channel.send(`Nemůžeš zabanovat sám sebe!`)
+        
+      if(member.user.id === "822391645697212416") return message.channel.send(`Nemôžem zabanovať seba. D:`)
       
       if(member.roles.highest.position >= message.member.roles.highest.position) return message.channel.send(`Nemôžeš zabanovať väčšiu rolu ako máš ty/takú istú ako máš ty!`)
       

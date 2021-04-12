@@ -8,6 +8,11 @@ module.exports = {
 	cooldown: 4,
     	async execute(message, args) {
             var reddit = args[0]
+            var noargs = new Discord.MessageEmbed()
+            .setColor('#e54918')
+            .addField('<:kt_nesuhlas:822475199755583488> Niečo sa pokazilo', 'Musíš špecifikovať Sub-Reddit. (napr. r/discordapp)')
+            .setFooter(`karot.xyz - ${Date.now() - message.createdTimestamp}ms`)
+            if(!args[0]) return message.channel.send(noargs)
         var buff = (await axios({
             url: new URL(`https://api.hyrousek.tk/useless/reddit?reddit=${reddit}`).toString(),
             headers: {"Authorization":"r/apikeys nie je v cene"},

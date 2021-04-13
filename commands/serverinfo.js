@@ -4,7 +4,7 @@ module.exports = {
     name: 'serverinfo',
     aliases: ['server', 'srvrinfo', 'guild'],
 	description: 'Pošle infošky o serveri na ktorom je.',
-	async execute(message, args) {
+	async execute(client, message, args) {
 		const embed = new Discord.MessageEmbed()
             .setColor('#e54918')
 			.setThumbnail(message.guild.iconURL({dynamic:true}))

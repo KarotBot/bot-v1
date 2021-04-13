@@ -1,37 +1,16 @@
 const fs              = require('fs');
 const Discord         = require('discord.js');
 const {prefix, token} = require('./config.json');
-const client = new discord.Client({ disableMentions: 'everyone' });
+const client          = new Discord.Client();
 client.commands       = new Discord.Collection();
 const commandFiles    = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 const cooldowns       = new Discord.Collection();
 const os              = require('os');
-const { Player }      = require('discord-player');
-client.player         = new Player(client);
-client.config         = require('./config/bot');
-client.emotes         = client.config.emojis;
-client.filters        = client.config.filters;
-client.commands       = new discord.Collection();
 
 for (const file of commandFiles) {
 	const command = require(`./commands/${file}`);
 	client.commands.set(command.name, command);
 }
-
-const events = fs.readdirSync('./events').filter(file => file.endsWith('.js'));
-const player = fs.readdirSync('./player').filter(file => file.endsWith('.js'));
-
-for (const file of events) {
-    console.log(`Loading discord.js event ${file}`);
-    const event = require(`./events/${file}`);
-    client.on(file.split(".")[0], event.bind(null, client));
-};
-
-for (const file of player) {
-    console.log(`Loading discord-player event ${file}`);
-    const event = require(`./player/${file}`);
-    client.player.on(file.split(".")[0], event.bind(null, client));
-};
 
 const activities_list = [
     `${client.guilds.cache.size} guild ☰ +help`, 

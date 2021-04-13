@@ -5,7 +5,7 @@ module.exports = {
 	name: 'siryakari',
 	description: 'Posle meme',
 	cooldown: 4,
-    	async execute(message, args) {
+    	async execute(client, message, args) {
         var buff = (await axios({
             url: new URL("https://api.hyrousek.tk/useless/reddit?reddit=siryakari").toString(),
             headers: {"Authorization":"trospi19"},

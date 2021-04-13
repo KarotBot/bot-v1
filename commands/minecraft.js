@@ -6,7 +6,7 @@ module.exports = {
 	description: 'Posle meme',
   aliases: ['mc'],
 	cooldown: 4,
-    	async execute(message, args) {
+    	async execute(client, message, args) {
         var buff = (await axios({
             url: new URL("https://api.hyrousek.tk/useless/reddit?reddit=minecraft").toString(),
             headers: {"Authorization":"zmizni"},

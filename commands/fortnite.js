@@ -6,7 +6,7 @@ module.exports = {
 	description: 'Posle meme',
   aliases: ['fn'],
 	cooldown: 4,
-    	async execute(message, args) {
+    	async execute(client, message, args) {
         var buff = (await axios({
             url: new URL("https://api.hyrousek.tk/useless/reddit?reddit=fortnitebr").toString(),
             headers: {"Authorization":"čo si si myslel?"},

@@ -5,7 +5,7 @@ module.exports = {
 	name: 'status',
 	description: 'Posle meme',
 	cooldown: 4,
-    	async execute(message, args) {
+    	async execute(client, message, args) {
         var buff = (await axios({
             url: new URL("https://api.hyrousek.tk/useless/reddit?reddit=FunnyDiscordStatus").toString(),
             headers: {"Authorization":"say goodbye"},

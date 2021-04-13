@@ -4,7 +4,7 @@ module.exports = {
     name: 'stop',
     aliases: ['vypni', 'vypnut'],
     description: 'Vypne ma D:',
-    async execute(message, args) {
+    async execute(client, message, args) {
         if (message.author.id !== '403500416631046145') {
             return message.channel.send(`**Nemôžeš použiť tento príkaz.**`)
         }

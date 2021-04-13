@@ -6,7 +6,7 @@ module.exports = {
 	description: 'Posle meme',
   aliases: ['r/'],
 	cooldown: 4,
-    	async execute(message, args) {
+    	async execute(client, message, args) {
             var reddit = args[0]
             var noargs = new Discord.MessageEmbed()
             .setColor('#e54918')

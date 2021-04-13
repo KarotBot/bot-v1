@@ -3,7 +3,7 @@ console.log("Načítvám příkaz pro kickování těch sviní! B)")
 module.exports = {
     name: 'kick',
     description: 'Tímhle můžeš kickovat ty svině!',
-    async execute(message, args) {
+    async execute(client, message, args) {
           if(!message.member.hasPermission('KICK_MEMBERS'))
           if(!message.member.hasPermission('ADMINISTRATOR'))
             return message.channel.send(`<:kt_pain:822491637023899678> Nemáš permisie!`)

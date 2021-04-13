@@ -4,7 +4,7 @@ module.exports = {
     name: 'help',
     aliases: ['pomoc', 'prikazy', 'príkazy'],
     description: 'Pošle moje príkazy',
-    async execute(message, args) {
+    async execute(client, message, args) {
     const embed = new Discord.MessageEmbed()
     .setColor('#e54918')
     .setTitle('<:kt_job:822478953939599390>︱List príkazov')

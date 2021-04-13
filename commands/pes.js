@@ -5,7 +5,7 @@ module.exports = {
 	name: 'pes',
 	description: 'Posle pes :p',
 	cooldown: 4,
-    	async execute(message, args) {
+    	async execute(client, message, args) {
         var buff = (await axios({
             url: new URL("https://api.hyrousek.tk/useless/reddit?reddit=doggies").toString(),
             headers: {"Authorization":"choď preč"},

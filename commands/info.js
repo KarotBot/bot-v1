@@ -6,7 +6,7 @@ module.exports = {
     name: 'info',
     aliases: ['infosky', 'infošky', 'botinfo'],
     description: 'Pošle moje infošky',
-    async execute(message, args) {
+    async execute(client, message, args) {
     const embed = new Discord.MessageEmbed()
     .setColor('#e54918')
     .setTitle('Karot')

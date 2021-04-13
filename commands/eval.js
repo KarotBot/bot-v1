@@ -28,7 +28,13 @@ module.exports = {
             });
         })
     } catch (err) {
-        message.channel.send(`\\<:kt_nesuhlas:822475199755583488> Niečo sa pokazilo\`\`\`js\n${err.stack}\n\`\`\``);
+        var errorcatch = new Discord.MessageEmbed()
+        .setTitle('Eval')
+        .setColor('#e54918')
+        .setFooter(`karot.xyz - ${Date.now() - message.createdTimestamp}ms`)
+        .addField('Vstup:', args[0])
+        .addField('Výstup:', `${err.stack}`)
+        message.channel.send(errorcatch);
     }
 
 }

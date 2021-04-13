@@ -38,14 +38,14 @@ module.exports = {
               } else {
                
                 var nenitu = new Discord.MessageEmbed()
-                .addField('<:kt_nesuhlas:822475199755583488> Niečo sa pokazilo', 'Musíš niekoho označiť vo formáte +ban [človek] [dôvod].')
+                .addField('<:kt_nesuhlas:822475199755583488> Niečo sa pokazilo', 'Musíš niekoho označiť vo formáte +kick [človek] [dôvod].')
                 .setColor('#e54918')
                 message.channel.send(nenitu);
               }
          
             } else {
               var nenitu2 = new Discord.MessageEmbed()
-              .addField('<:kt_nesuhlas:822475199755583488> Niečo sa pokazilo', 'Musíš niekoho označiť vo formáte +ban [človek] [dôvod].')
+              .addField('<:kt_nesuhlas:822475199755583488> Niečo sa pokazilo', 'Musíš niekoho označiť vo formáte +kick [človek] [dôvod].')
               .setColor('#e54918')
               message.channel.send(nenitu2);
             }

@@ -3,7 +3,7 @@ console.log("Načítavam merač mojej latencioš. ~(˘▾˘~)")
 module.exports = {
     name: 'ping',
     discription: 'Pošle môj "perfektný" ping',
-    async execute(message, args) {
+    async execute(client, message, args) {
         var embed = new Discord.MessageEmbed()
         .setTitle('<:kt_hey:822468640103202858>︱Môj ping')
         .setColor('#e54918')

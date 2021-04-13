@@ -4,7 +4,7 @@ module.exports = {
 	name: 'kacka',
 	description: 'Posle kacku',
 	cooldown: 4,
-	async execute(message, args) {
+	async execute(client, message, args) {
         const fetch = require("node-fetch")
 		var json = await (await fetch("https://random-d.uk/api/v2/random")).json();
 		if(!json.url) return;

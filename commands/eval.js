@@ -5,7 +5,7 @@ module.exports = {
 	description: 'Eval commandy',
   aliases: ['js'],
 	cooldown: 4,
-    	async execute(message, args) {
+    	async execute(client, message, args) {
     if (!["403500416631046145"].includes(message.author.id)) return;
 
     try {

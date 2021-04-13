@@ -4,7 +4,7 @@ module.exports = {
     name: 'cislo',
     aliases: ['number', 'num', 'cislica'],
 	description: 'Posle cislo od 0 do 10000',
-	async execute(message, args) {
+	async execute(client, message, args) {
         var embed = new Discord.MessageEmbed()
         .setDescription(Math.floor(Math.random()*10001))
         .setTitle('Náhodné čislo')

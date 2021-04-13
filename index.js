@@ -1,7 +1,7 @@
 const fs              = require('fs');
 const Discord         = require('discord.js');
 const {prefix, token} = require('./config.json');
-const client          = new Discord.Client();
+const client = new discord.Client({ disableMentions: 'everyone' });
 client.commands       = new Discord.Collection();
 const commandFiles    = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 const cooldowns       = new Discord.Collection();

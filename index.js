@@ -18,6 +18,21 @@ for (const file of commandFiles) {
 	client.commands.set(command.name, command);
 }
 
+const events = fs.readdirSync('./events').filter(file => file.endsWith('.js'));
+const player = fs.readdirSync('./player').filter(file => file.endsWith('.js'));
+
+for (const file of events) {
+    console.log(`Loading discord.js event ${file}`);
+    const event = require(`./events/${file}`);
+    client.on(file.split(".")[0], event.bind(null, client));
+};
+
+for (const file of player) {
+    console.log(`Loading discord-player event ${file}`);
+    const event = require(`./player/${file}`);
+    client.player.on(file.split(".")[0], event.bind(null, client));
+};
+
 const activities_list = [
     `${client.guilds.cache.size} guild ☰ +help`, 
     "www.karot.xyz",

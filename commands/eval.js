@@ -19,8 +19,8 @@ module.exports = {
         .setTitle('Eval')
         .setColor('#e54918')
         .setFooter(`karot.xyz - ${Date.now() - message.createdTimestamp}ms`)
-        .addField('Vstup:', args[0])
-        .addField('Výstup:', `evaled`)
+        .addField('Vstup:', `${code}`)
+        .addField('Výstup:', `${evaled}`)
         message.channel.send(embed).then(() => {
             message.channel.send(evaled, {
                 code: "js",

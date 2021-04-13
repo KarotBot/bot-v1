@@ -44,7 +44,7 @@ module.exports = {
     .setColor('#e54918')
 
     var nenitu = new Discord.MessageEmbed()
-    .addField('<:kt_nesuhlas:822475199755583488> Niečo sa pokazilo', 'Užívateľ ktorého chceš zabanovať nie je na serveri.')
+    .addField('<:kt_nesuhlas:822475199755583488> Niečo sa pokazilo', 'Musíš niekoho označiť vo formáte +ban [človek] [dôvod].')
     .setColor('#e54918')
 
     var samokick = new Discord.MessageEmbed()

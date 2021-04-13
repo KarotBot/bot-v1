@@ -6,6 +6,12 @@ client.commands       = new Discord.Collection();
 const commandFiles    = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 const cooldowns       = new Discord.Collection();
 const os              = require('os');
+const { Player }      = require('discord-player');
+client.player         = new Player(client);
+client.config         = require('./config/bot');
+client.emotes         = client.config.emojis;
+client.filters        = client.config.filters;
+client.commands       = new discord.Collection();
 
 for (const file of commandFiles) {
 	const command = require(`./commands/${file}`);

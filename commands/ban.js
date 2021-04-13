@@ -3,7 +3,7 @@ console.log("Načítám příkaz na banování těch sviní! :)")
 module.exports = {
     name: 'ban',
     description: 'Zabanuje nějakýho kokota, kterej dělá píčoviny.',
-    async execute(message, args) {
+    async execute(client, message, args) {
       if(!message.member.hasPermission("BAN_MEMBERS")) 
       if(!message.member.hasPermission("ADMINISTRATOR")) 
       return message.channel.send(`<:kt_pain:822491637023899678> Nemáš permisie!`)

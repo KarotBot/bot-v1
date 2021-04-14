@@ -22,7 +22,7 @@ client.categories = fs.readdirSync("./commands/");
 
 
 const activities_list = [
-    `${client.guilds.cache.size} guild ☰ +help`,
+    `${client.guilds.cache.size} guild | +help`,
     "www.karot.xyz | +help",
     "#KarotGang | +help",
 	"cc panda | +help",

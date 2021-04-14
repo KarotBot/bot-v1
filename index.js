@@ -7,7 +7,7 @@ const os = require('os');
 const blacklistTable = new db.table("blacklist");
 
 const client = new Client({
-	disableMentions: 'everyone';
+	disableMentions: 'everyone'
 });
 
 const cooldowns = new Collection();
@@ -44,10 +44,10 @@ client.on('ready', () => {
 
 client.on('message', async(message) => {
 	if (message.content === "<@822391645697212416>" || message.content === "<@!822391645697212416>") {
-		return message.channel.send("**Ahoj, moje meno je Karot.** <:kt_hey:822468640103202858> \nMôj prefix je +. Použí príkaz +help ak sa chceš dozvedieť čo všetko dokážem!");
+		return message.channel.send("**Ahoj, moje meno je Karot.** <:kt_hey:822468640103202858> \nMôj prefix je `+`. Použí príkaz `+help` ak sa chceš dozvedieť čo všetko dokážem!");
 	}
   if (!message.content.startsWith(prefix) || message.author.bot) return;
-  	if (blacklistTable.all().filter(datatable => datatable.ID === "users" && datatable.data.blacklisted && datatable.data.blacklisted.includes(message.author.id)) > 0) {
+  	if (blacklistTable.all().filter(datatable => datatable.ID === "users" && datatable.data.blacklisted && datatable.data.blacklisted.includes(message.author.id)).length > 0) {
 		const embed = new Discord.MessageEmbed()
 			.setColor("#e54918")
 			.setAuthor(message.author.tag, message.author.avatarURL({ size: 128, dynamic: true }))
@@ -119,7 +119,7 @@ client.on('guildCreate', (guild) => {
 	}
 
 	)
-	if (blacklistTable.all().filter(datatable => datatable.ID === "guilds" && datatable.data.blacklisted && datatable.data.blacklisted.includes(guild.id)).size > 0) {
+	if (blacklistTable.all().filter(datatable => datatable.ID === "guilds" && datatable.data.blacklisted && datatable.data.blacklisted.includes(guild.id)).length > 0) {
 		guild.leave();
 		const owner = guild.owner;
 		owner.send("Dostali ste zákaz používať služby Karot na Vašom Discord serveri " + guild.name + ". Ak si myslíte, že je tento trest nespravodlivý/chybný, môžete sa odvolať [tu](https://bit.ly/karotodvolanie).");

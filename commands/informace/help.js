@@ -50,7 +50,7 @@ function getCMD(client, message, input) {
 
     if (cmd.name) info = `**Jméno příkazu**: ${cmd.name}`;
     if (cmd.aliases) info += `\n**Aliasy**: ${cmd.aliases.map(a => `\`${a}\``).join(", ")}`;
-    if (cmd.description) info += `\n**Popis**: ${message.translation_strings.commands.descriptions.categories[cmd.category][cmd.name] || cmd.description || "No description defined."}`;
+    if (cmd.description) info += `\n**Popis**: ${cmd.description}`;
     if (cmd.usage) {
         info += `\n**Použití**: ${cmd.usage}`;
         embed.setFooter(`Syntaxe: <> = povinné, [] = dobrovolné`);

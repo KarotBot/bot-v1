@@ -33,7 +33,7 @@ module.exports = {
         .setTitle('Eval')
         .setColor('#e54918')
         .setFooter(`karot.xyz - ${Date.now() - message.createdTimestamp}ms`)
-        .addField('Vstup:', `${evaled}`)
+        .addField('Vstup:', `${args.join(" ")}`)
         .addField('Výstup:', `${err.stack}`)
         message.channel.send(errorcatch);
     }

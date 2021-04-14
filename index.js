@@ -23,24 +23,16 @@ client.categories = fs.readdirSync("./commands/");
 
 const activities_list = [
     `${client.guilds.cache.size} guild ☰ +help`,
-    "www.karot.xyz",
-    "#KarotGang",
-    `${Math.trunc((process.memoryUsage().heapUsed) / 1024 / 1000)} MB / ${Math.trunc(os.totalmem() / 1024 / 1000)} MB (${Math.round((Math.round(process.memoryUsage().heapUsed / 1024 / 1024) / Math.round(os.totalmem() / 1024 / 1024)) * 100)}%) RAM`,
-	"Vyrobil s ❤️ Slenky",
-	"🥕🍎🥔G A N G",
-	"Seasickova Farťnite montáž",
-	"JA NECHCEM DO POLIEVKY :(",
-	"cc panda",
-	"Kekega",
-	"peepeepoopoo",
-	"https://youtu.be/dQw4w9WgXcQ",
-	"yes",
-	"sus",
-	"som zemiak",
-	"help me im stuck in a discord bot and i wanna go home",
-	"im big chungusfortnite420",
-	"a dostanem nytro???!!1!1!?????",
-	"i want to chug jug with you",
+    "www.karot.xyz | +help",
+    "#KarotGang | +help",
+	"cc panda | +help",
+	"Kekega | +help",
+	"https://youtu.be/dQw4w9WgXcQ | +help",
+	"som zemiak | +help",
+	"help me im stuck in a discord bot and i wanna go home | +help",
+	"im big chungusfortnite420 | +help",
+	"a dostanem nytro???!!1!1!????? | +help",
+	"i want to chug jug with you | +help",
     ];
 
 client.on('ready', () => {
@@ -49,6 +41,28 @@ client.on('ready', () => {
         client.user.setActivity(activities_list[index], { type: 'WATCHING' });
     }, 10000);
 });
+client.on('guildCreate', (guild) => {
+	const webhook = new Discord.WebhookClient("abc", "abc"); // Webhook
+
+	var whem = new Discord.MessageEmbed() // Embed
+	.setColor('#e54918')
+	.setThumbnail(guild.iconURL({dynamic:true}))
+	.addField("Názov servera", guild.name, true)
+	.addField("ID", guild.id, true)
+	.addField("Počet členov", guild.members.cache.size, true)
+	.addField("Majiteľ", guild.owner, true)
+	.addField("Role", guild.roles.cache.size, true)
+	.addField("Emoji", guild.emojis.cache.size, true)
+
+	webhook.send('<:kt_hey:822468640103202858> Nový server!',{ 
+		username: 'Nový server',
+		avatarURL: 'https://cdn.discordapp.com/emojis/822468640103202858.png?v=1',  // Posielanie
+		embeds: [whem]
+	}
+
+	)
+
+})
 
 client.on('message', async(message) => {
 	if (message.content === "<@822391645697212416>" || message.content === "<@!822391645697212416>") {

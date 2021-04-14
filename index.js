@@ -41,28 +41,6 @@ client.on('ready', () => {
         client.user.setActivity(activities_list[index], { type: 'WATCHING' });
     }, 10000);
 });
-client.on('guildCreate', (guild) => {
-	const webhook = new Discord.WebhookClient("abc", "abc"); // Webhook
-
-	var whem = new Discord.MessageEmbed() // Embed
-	.setColor('#e54918')
-	.setThumbnail(guild.iconURL({dynamic:true}))
-	.addField("Názov servera", guild.name, true)
-	.addField("ID", guild.id, true)
-	.addField("Počet členov", guild.members.cache.size, true)
-	.addField("Majiteľ", guild.owner, true)
-	.addField("Role", guild.roles.cache.size, true)
-	.addField("Emoji", guild.emojis.cache.size, true)
-
-	webhook.send('<:kt_hey:822468640103202858> Nový server!',{ 
-		username: 'Nový server',
-		avatarURL: 'https://cdn.discordapp.com/emojis/822468640103202858.png?v=1',  // Posielanie
-		embeds: [whem]
-	}
-
-	)
-
-})
 
 client.on('message', async(message) => {
 	if (message.content === "<@822391645697212416>" || message.content === "<@!822391645697212416>") {

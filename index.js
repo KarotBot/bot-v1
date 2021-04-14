@@ -1,21 +1,28 @@
-const fs              = require('fs');
-const Discord         = require('discord.js');
-const {prefix, token} = require('./config.json');
-const client          = new Discord.Client();
-client.commands       = new Discord.Collection();
-const commandFiles    = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
-const cooldowns       = new Discord.Collection();
-const os              = require('os');
+const fs = require('fs');
+const Discord = require('discord.js');
+const { Client, Collection } = require('discord.js');
+const { prefix, token } = require('./config.json');
+const os = require('os');
 
-for (const file of commandFiles) {
-	const command = require(`./commands/${file}`);
-	client.commands.set(command.name, command);
-}
+const client = new Client({
+	disableMentions: 'everyone';
+});
+
+const cooldowns = new Collection();
+client.commands = new Collection();
+client.aliases = new Collection();
+
+client.categories = fs.readdirSync("./commands/");
+
+["command"].forEach(handler => {
+	require(`./handlers/${handler}`)(client);
+});
+
 
 const activities_list = [
-    `${client.guilds.cache.size} guild ☰ +help`, 
+    `${client.guilds.cache.size} guild ☰ +help`,
     "www.karot.xyz",
-    "#KarotGang", 
+    "#KarotGang",
     `${Math.trunc((process.memoryUsage().heapUsed) / 1024 / 1000)} MB / ${Math.trunc(os.totalmem() / 1024 / 1000)} MB (${Math.round((Math.round(process.memoryUsage().heapUsed / 1024 / 1024) / Math.round(os.totalmem() / 1024 / 1024)) * 100)}%) RAM`,
 	"Vyrobil s ❤️ Slenky",
 	"🥕🍎🥔G A N G",
@@ -38,7 +45,7 @@ client.on('ready', () => {
     setInterval(() => {
         const index = Math.floor(Math.random() * (activities_list.length - 1) + 1);
         client.user.setActivity(activities_list[index], { type: 'WATCHING' });
-    }, 10000); 
+    }, 10000);
 });
 
 client.on('message', async(message) => {
@@ -82,5 +89,7 @@ client.on('message', async(message) => {
 		console.log('Error ¯\_(ツ)_/¯');
 	}
 });
+
+client.on("debug", async info => console.log(info));
 
 client.login(token);

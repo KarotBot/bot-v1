@@ -110,7 +110,7 @@ client.on('guildCreate', (guild) => {
 	.addField("Počet botov", guild.members.cache.filter(member => member.user.bot).size)
 	.addField("Majiteľ", guild.owner, true)
 	.addField("Počet rolí", guild.roles.cache.size, true)
-	.addField("Počet e;moji", guild.emojis.cache.size, true)
+	.addField("Počet emoji", guild.emojis.cache.size, true)
 
 	webhook.send('<:kt_hey:822468640103202858> Nový server!',{
 		username: 'Nový server',

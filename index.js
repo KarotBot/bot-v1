@@ -22,17 +22,17 @@ client.categories = fs.readdirSync("./commands/");
 
 
 const activities_list = [
-    `${client.guilds.cache.size} guild | +help`,
-    "www.karot.xyz | +help",
-    "#KarotGang | +help",
-	"cc panda | +help",
-	"Kekega | +help",
-	"https://youtu.be/dQw4w9WgXcQ | +help",
-	"som zemiak | +help",
-	"help me im stuck in a discord bot and i wanna go home | +help",
-	"im big chungusfortnite420 | +help",
-	"a dostanem nytro???!!1!1!????? | +help",
-	"i want to chug jug with you | +help",
+    `${client.guilds.cache.size} guild | ${prefix}help`,
+    `www.karot.xyz | ${prefix}help`,
+    `#KarotGang | ${prefix}help`,
+	`cc panda | ${prefix}help`,
+	`Kekega | ${prefix}help`,
+	`https://youtu.be/dQw4w9WgXcQ | ${prefix}help`,
+	`som zemiak | ${prefix}help`,
+	`help me im stuck in a discord bot and i wanna go home | ${prefix}help`,
+	`im big chungusfortnite420 | ${prefix}help`,
+	`a dostanem nytro???!!1!1!????? | ${prefix}help`,
+	`i want to chug jug with you | ${prefix}help`,
     ];
 
 client.on('ready', () => {
@@ -54,7 +54,7 @@ client.on('message', async(message) => {
 		in_prefix = prefix;
 	}
 	if (message.content === "<@822391645697212416>" || message.content === "<@!822391645697212416>") {
-		return message.channel.send("**Ahoj, moje meno je Karot.** <:kt_hey:822468640103202858> \nMôj prefix je `+`. Použí príkaz `+help` ak sa chceš dozvedieť čo všetko dokážem!");
+		return message.channel.send(`**Ahoj, moje meno je Karot.** <:kt_hey:822468640103202858> \nMôj prefix je \`${in_prefix}\`. Použí príkaz \`${in_prefix}help\` ak sa chceš dozvedieť čo všetko dokážem!`);
 	}
   	if (blacklistTable.all().filter(datatable => datatable.ID === "users" && datatable.data.blacklisted && datatable.data.blacklisted.includes(message.author.id)).length > 0) {
 		const embed = new Discord.MessageEmbed()
@@ -66,6 +66,7 @@ client.on('message', async(message) => {
 			.setTimestamp();
 		return message.author.send(embed);
 	}
+	if (!message.content.startsWith(in_prefix)) return;
 
 	const args = message.content.slice(prefix.length).trim().split(/ +/);
 	const commandName = args.shift().toLowerCase();

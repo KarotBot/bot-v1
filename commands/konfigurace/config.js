@@ -16,10 +16,9 @@ module.exports = {
 			.setColor("#e54918")
 			.setAuthor(message.author.tag, message.author.avatarURL({ size: 128, dynamic: true }))
 			.setTitle("Configuration")
-			.setDescription("What do you want to config?")
+			.setDescription("Čo chceš nastaviť?")
 			.addField("\u200b", "\u200b")
-			.addField("`logs`", "**Start a log setup __(not inherited)__**")
-			.addField("`prefix`", "**Start a prefix setup**")
+			.addField("`prefix`", "**Začne nastavenie prefixu.**")
 			.addField("\u200b", "\u200b")
 			.setFooter(`karot.xyz`)
 			.setTimestamp();

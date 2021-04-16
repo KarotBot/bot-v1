@@ -43,16 +43,25 @@ client.on('ready', () => {
 });
 
 client.on('message', async(message) => {
+	var in_prefix;
+	if (message.guild) {
+		if (db.has(message.guild.id)) {
+			in_prefix = db.get(message.guild.id);
+		} else {
+			in_prefix = prefix;
+		}
+	} else {
+		in_prefix = prefix;
+	}
 	if (message.content === "<@822391645697212416>" || message.content === "<@!822391645697212416>") {
 		return message.channel.send("**Ahoj, moje meno je Karot.** <:kt_hey:822468640103202858> \nMôj prefix je `+`. Použí príkaz `+help` ak sa chceš dozvedieť čo všetko dokážem!");
 	}
-  if (!message.content.startsWith(prefix) || message.author.bot) return;
   	if (blacklistTable.all().filter(datatable => datatable.ID === "users" && datatable.data.blacklisted && datatable.data.blacklisted.includes(message.author.id)).length > 0) {
 		const embed = new Discord.MessageEmbed()
 			.setColor("#e54918")
 			.setAuthor(message.author.tag, message.author.avatarURL({ size: 128, dynamic: true }))
 			.setTitle("Údržba")
-			.setDescription("KarotBot momentálně není dostupný a kvůli vašemu zneužívání byly všechny jeho příkazy smazány. Pokud si myslíte, že jste bota nezneužívali, klikněte [tu](https://bit.ly/karotodvolanie).")
+			.setDescription("KarotBot momentálně není dostupný a kvůli vašemu zneužívání byly všechny jeho příkazy smazány. Pokud si myslíte, že jste bota nezneužíval/a, klikněte [tu](https://bit.ly/karotodvolanie).")
 			.setFooter(`karot.xyz - ${Date.now() - message.createdTimestamp}ms`)
 			.setTimestamp();
 		return message.author.send(embed);

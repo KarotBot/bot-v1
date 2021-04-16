@@ -18,14 +18,16 @@ module.exports = {
 			.setTitle("Configuration")
 			.setDescription("What do you want to config?")
 			.addField("\u200b", "\u200b")
-			.addField("`prefix`", "**Nastaví prefix**")
+			.addField("`logs`", "**Start a log setup __(not inherited)__**")
+			.addField("`prefix`", "**Start a prefix setup**")
 			.addField("\u200b", "\u200b")
-			.setFooter(`karot.xyz - 0s`)
+			.setFooter(`karot.xyz`)
 			.setTimestamp();
 		const init_msg = await message.channel.send(init_embed);
 		const filter = m => m.author.id === message.author.id;
-		const collector = message.channel.createMessageCollector(filter, { time: 30000, max: 1});
-		var collector_start = Date.now();
+		const coll_mes = await message.channel.awaitMessages(filter, { time: 30000, max: 1});
+		const m = coll_mes.first();
+		/*var collector_start = Date.now();
 		for (var i = 0; collector_start + 30000 < Date.now(); i++) {
 			const cont_init_embed = new MessageEmbed()
 				.setColor("#e54918")
@@ -39,9 +41,7 @@ module.exports = {
 				.setFooter(`karot.xyz - ${Math.round((-(collector_start - Date.now()))/1000)}s`)
 				.setTimestamp();
 			await init_msg.edit(cont_init_embed);
-		}
-		collector.on("collect", async m => {
-			collector_start = Infinity;
+		}*/
 			if (m.content.toLowerCase() !== "prefix") {
 				return msg.edit("❌ | Příkaz zrušen", {embed: null});
 			}

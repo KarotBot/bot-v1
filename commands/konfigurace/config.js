@@ -49,6 +49,5 @@ module.exports = {
 			const new_prefix = col_msgs.first();
 			if (new_prefix.content.toLowerCase() === "default" || new_prefix.content.toLowerCase() === prefix) return db.delete(message.guild.id);
 			db.set(message.guild.id, new_prefix.content.toLowerCase());
-		});
 	}
 }

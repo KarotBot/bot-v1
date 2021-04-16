@@ -18,8 +18,7 @@ module.exports = {
 			.setTitle("Configuration")
 			.setDescription("What do you want to config?")
 			.addField("\u200b", "\u200b")
-			.addField("`logs` - **Start a log setup __(not inherited)__**")
-			.addField("`prefix` - **Start a prefix setup**")
+			.addField("`prefix`", "**Nastaví prefix**")
 			.addField("\u200b", "\u200b")
 			.setFooter(`karot.xyz - 0s`)
 			.setTimestamp();

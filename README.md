@@ -12,12 +12,12 @@
 
 ## Dôležité informácie
 
-* **Prefix:** + <br>
+* **Predvolený prefix:** ! <br>
 * **Webstránky:** www.karot.xyz
 * **Oficiálny Discord server:** [9Byp7mWfMF](https://discord.com/invite/9Byp7mWfMF)
 * **Hlavný správca/vlastník bota:** [Slenky](https://github.com/Slenkston)
 
-## Kontríbucie
+## Kontribúcie
 
 Ak si prajete kontributovať ku projektu budeme veľmi radi. <br>
 Za odmenu si môžete vyžiadať Discord rolu Octocat takže určite sa pred kontribúciou pripojte na náš [Discord server](https://discord.com/invite/9Byp7mWfMF) a do pull requestu špecifikujte svoje Discord meno a tag/diskriminátor alebo svoje Discord ID.

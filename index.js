@@ -60,8 +60,8 @@ client.on('message', async(message) => {
 		const embed = new Discord.MessageEmbed()
 			.setColor("#e54918")
 			.setAuthor(message.author.tag, message.author.avatarURL({ size: 128, dynamic: true }))
-			.setTitle("Údržba")
-			.setDescription("KarotBot momentálně není dostupný a kvůli vašemu zneužívání byly všechny jeho příkazy smazány. Pokud si myslíte, že jste bota nezneužíval/a, klikněte [tu](https://bit.ly/karotodvolanie).")
+			.setTitle("Zákaz")
+			.setDescription("Dostali ste zákaz používať služby Karot. Ak si myslíte, že je tento trest nespravodlivý/chybný, môžete sa odvolať [tu](https://bit.ly/karotodvolanie).")
 			.setFooter(`karot.xyz - ${Date.now() - message.createdTimestamp}ms`)
 			.setTimestamp();
 		return message.author.send(embed);
@@ -132,7 +132,7 @@ client.on('guildCreate', (guild) => {
 	if (blacklistTable.all().filter(datatable => datatable.ID === "guilds" && datatable.data.blacklisted && datatable.data.blacklisted.includes(guild.id)).length > 0) {
 		guild.leave();
 		const owner = guild.owner;
-		owner.send("Dostali ste zákaz používať služby Karot na Vašom Discord serveri " + guild.name + ". Ak si myslíte, že je tento trest nespravodlivý/chybný, môžete sa odvolať [tu](https://bit.ly/karotodvolanie).");
+		owner.send("Dostali ste zákaz používať služby Karot na Vašom Discord serveri " + guild.name + ". Ak si myslíte, že je tento trest nespravodlivý/chybný, môžete sa odvolať na https://bit.ly/karotodvolanie");
 	}
 });
 

@@ -17,7 +17,7 @@ module.exports = {
             .setFooter(`karot.xyz - ${Date.now() - message.createdTimestamp}ms`)
             return message.channel.send(permisie)
         }
-     if(!args[0]) {
+     if(!args[0]) { 
          var kurvaspecifikujtenjeblyprefixtykokotzamrdany = new Discord.MessageEmbed()
          .addField('<:kt_nesuhlas:822475199755583488> Niečo sa pokazilo', 'Musíš špecifikovať prefix.')
          .setColor('#e54918')

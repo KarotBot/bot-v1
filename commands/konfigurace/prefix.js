@@ -33,7 +33,7 @@ module.exports = {
         return message.channel.send(menejpls) 
      }
 
-     if(args.lenght > 1) {
+     if(args.length > 1) {
          var medzera = new Discord.MessageEmbed()
          .addField('<:kt_nesuhlas:822475199755583488> Niečo sa pokazilo', `Prefix nemôže byť dlhší ako 1 znak!`)
          .setColor('#e54918')

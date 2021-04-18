@@ -33,6 +33,14 @@ module.exports = {
         return message.channel.send(menejpls) 
      }
 
+     if(args.lenght > 1) {
+         var medzera = new Discord.MessageEmbed()
+         .addField('<:kt_nesuhlas:822475199755583488> Niečo sa pokazilo', `Prefix nemôže byť dlhší ako 1 znak!`)
+         .setColor('#e54918')
+         .setFooter(`karot.xyz - ${Date.now() - message.createdTimestamp}ms`)
+         return message.channel.send(medzera)
+     }
+
      if (args[0] === "default" || args[0] === prefix) return db.delete(message.guild.id);
      db.set(message.guild.id,args[0]);
      message.channel.send('<:kt_suhlas:822473993780068393> Prefix bol úspešne nastavený!')

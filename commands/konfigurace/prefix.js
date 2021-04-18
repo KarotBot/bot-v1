@@ -12,7 +12,7 @@ module.exports = {
   	execute: async (client, message, args) => {
 		if (!message.member.hasPermission("MANAGE_GUILD", {checkAdmin: true, checkOwner: true})) {
             var permisie = new Discord.MessageEmbed()
-            .addField('<:kt_nesuhlas:822475199755583488> Niečo sa pokazilo', 'Na túto akciu nemáš právo.`')
+            .addField('<:kt_nesuhlas:822475199755583488> Niečo sa pokazilo', 'Na túto akciu nemáš právo.')
             .setColor('#e54918')
             .setFooter(`karot.xyz - ${Date.now() - message.createdTimestamp}ms`)
             return message.channel.send(permisie)
@@ -35,5 +35,5 @@ module.exports = {
 
      if (args[0] === "default" || args[0] === prefix) return db.delete(message.guild.id);
      db.set(message.guild.id,args[0]);
-     message.channel.send('pog')
+     message.channel.send('<:kt_suhlas:822473993780068393> Prefix bol úspešne nastavený!')
 }}

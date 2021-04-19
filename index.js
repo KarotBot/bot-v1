@@ -12,50 +12,22 @@ const client = new Client({
 
 const cooldowns = new Collection();
 client.commands = new Collection();
+client.events = new Collection();
 client.aliases = new Collection();
 
 client.categories = fs.readdirSync("./commands/");
 
-["command"].forEach(handler => {
+["command", "event"].forEach(handler => {
 	require(`./handlers/${handler}`)(client);
 });
 
-
-const activities_list = [
-    `${client.guilds.cache.size} guild | ${prefix}help`,
-    `www.karot.xyz | ${prefix}help`,
-    `#KarotGang | ${prefix}help`,
-	`cc panda | ${prefix}help`,
-	`Kekega | ${prefix}help`,
-	`https://youtu.be/dQw4w9WgXcQ | ${prefix}help`,
-	`som zemiak | ${prefix}help`,
-	`help me im stuck in a discord bot and i wanna go home | ${prefix}help`,
-	`im big chungusfortnite420 | ${prefix}help`,
-	`a dostanem nytro???!!1!1!????? | ${prefix}help`,
-	`i want to chug jug with you | ${prefix}help`,
-    ];
-
-client.on('ready', () => {
-    setInterval(() => {
-        const index = Math.floor(Math.random() * (activities_list.length - 1) + 1);
-        client.user.setActivity(activities_list[index], { type: 'WATCHING' });
-    }, 10000);
-});
+client.on('ready', () => client.events.get("ready").run());
 
 client.on('message', async(message) => {
-	var in_prefix;
-	if (message.guild) {
-		if (db.has(message.guild.id)) {
-			in_prefix = db.get(message.guild.id);
-		} else {
-			in_prefix = prefix;
-		}
-	} else {
-		in_prefix = prefix;
-	}
 	if (message.content === "<@822391645697212416>" || message.content === "<@!822391645697212416>") {
-		return message.channel.send(`**Ahoj, moje meno je Karot.** <:kt_hey:822468640103202858> \nMôj prefix je \`${in_prefix}\`. Použí príkaz \`${in_prefix}help\` ak sa chceš dozvedieť čo všetko dokážem!`);
+		return message.channel.send("**Ahoj, moje meno je Karot.** <:kt_hey:822468640103202858> \nMôj prefix je `+`. Použí príkaz `+help` ak sa chceš dozvedieť čo všetko dokážem!");
 	}
+  if (!message.content.startsWith(prefix) || message.author.bot) return;
   	if (blacklistTable.all().filter(datatable => datatable.ID === "users" && datatable.data.blacklisted && datatable.data.blacklisted.includes(message.author.id)).length > 0) {
 		const embed = new Discord.MessageEmbed()
 			.setColor("#e54918")
@@ -66,7 +38,6 @@ client.on('message', async(message) => {
 			.setTimestamp();
 		return message.author.send(embed);
 	}
-	if (!message.content.startsWith(in_prefix)) return;
 
 	const args = message.content.slice(prefix.length).trim().split(/ +/);
 	const commandName = args.shift().toLowerCase();
@@ -107,34 +78,7 @@ client.on('message', async(message) => {
 	}
 });
 
-client.on('guildCreate', (guild) => {
-	const webhook = new Discord.WebhookClient("abc", "abc"); // Webhook
-
-	var whem = new Discord.MessageEmbed() // Embed
-	.setColor('#e54918')
-	.setThumbnail(guild.iconURL({dynamic:true}))
-	.addField("Názov servera", guild.name, true)
-	.addField("ID", guild.id, true)
-	.addField("Počet členov", guild.memberCount, true)
-	.addField("Počet použivaťelov", guild.members.cache.filter(member => !member.user.bot).size)
-	.addField("Počet botov", guild.members.cache.filter(member => member.user.bot).size)
-	.addField("Majiteľ", guild.owner, true)
-	.addField("Počet rolí", guild.roles.cache.size, true)
-	.addField("Počet emoji", guild.emojis.cache.size, true)
-
-	webhook.send('<:kt_hey:822468640103202858> Nový server!',{
-		username: 'Nový server',
-		avatarURL: 'https://cdn.discordapp.com/emojis/822468640103202858.png?v=1',  // Posielanie
-		embeds: [whem]
-	}
-
-	)
-	if (blacklistTable.all().filter(datatable => datatable.ID === "guilds" && datatable.data.blacklisted && datatable.data.blacklisted.includes(guild.id)).length > 0) {
-		guild.leave();
-		const owner = guild.owner;
-		owner.send("Dostali ste zákaz používať služby Karot na Vašom Discord serveri " + guild.name + ". Ak si myslíte, že je tento trest nespravodlivý/chybný, môžete sa odvolať na https://bit.ly/karotodvolanie");
-	}
-});
+client.on('guildCreate', (guild) => client.events.get("guildCreate").run(guild));
 
 client.on("debug", async info => console.log(info));
 

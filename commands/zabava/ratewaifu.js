@@ -50,4 +50,4 @@ module.exports = {
     if (result > 70) return message.channel.send(thumbupembed)
     if (result > 80) return message.channel.send(eyesembed)
   }
-}
+} 

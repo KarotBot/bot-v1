@@ -42,7 +42,7 @@ function getList(client, message, input) {
         .setColor("#e54918")
         .setAuthor(message.author.tag, message.author.avatarURL({ size: 128, dynamic: true }))
         .setDescription("Blacklisted " + input[0] + "s: \n" + enlisted)
-        .setFooter(`karot.xyz - ${Date.now() - message.createdTimestamp}`)
+        .setFooter(`karot.xyz - ${Date.now() - message.createdTimestamp}ms`)
         .setTimestamp();
     message.channel.send(embed).then(msg => msg.delete({timeout: 5000}));
 }

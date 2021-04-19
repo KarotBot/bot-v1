@@ -25,4 +25,3 @@ Za odmenu si môžete vyžiadať Discord rolu Octocat takže určite sa pred kon
 ## Self hostovanie
 
 Self hostovanie bota nie je zakázané ale nebude dostávať žiadnu podporu v prípade problému a taktiež ho neodporúčame.
-

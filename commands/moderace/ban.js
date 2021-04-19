@@ -14,7 +14,7 @@ module.exports = {
 
       if(!member) return message.channel.send(nenitu)
 
-      var reason = args.slice(1).join(" ")
+      var reason = args.slice(1).join(" ");
       if(!reason) reason = 'Nebol uvedený dôvod banu.'
 
       if(member.user.id === message.author.id) return message.channel.send(samokick)

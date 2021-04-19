@@ -8,9 +8,8 @@ module.exports = {
           if(!message.member.hasPermission('KICK_MEMBERS'))
           if(!message.member.hasPermission('ADMINISTRATOR'))
             return message.channel.send(`<:kt_pain:822491637023899678> Nemáš permisie!`)
-        
-            var reason = args.slice(1).join(" ")
-          const user = message.mentions.users.first();
+            var reason = args.slice(1).join(" ");
+            const user = message.mentions.users.first();
 
             if (user) {
 

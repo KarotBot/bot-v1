@@ -2,7 +2,6 @@ const { MessageEmbed } = require("discord.js");
 const { stripIndents } = require("common-tags");
 const { prefix } = require("../../config.json");
 const Discord = require("discord.js");
-const db = require("quick.db");
 
 module.exports = {
     name: 'help',
@@ -19,16 +18,6 @@ module.exports = {
 }
 
 function getAll(client, message) {
-    var in_prefix;
-    if (message.guild) {
-        if (db.has(message.guild.id)) {
-			in_prefix = db.get(message.guild.id);
-		} else {
-			in_prefix = prefix;
-		}
-	} else {
-		in_prefix = prefix;
-	}
     const embed = new MessageEmbed()
         .setColor("#e54918")
         .setTitle("<:kt_job:822478953939599390> | List príkazov")
@@ -40,12 +29,12 @@ function getAll(client, message) {
             .join(", ");
     }
 
-    const info = `**Nezařazené** [${client.commands.filter(cmd => cmd.category === undefined).size}] \n${commands(undefined)}` + client.categories
+    const info = `**Nezařazené** [${commands(undefined).length}] \n${commands(undefined)}` + client.categories
         .filter(cat => cat !== "dev")
-        .map(cat => stripIndents`**${cat[0].toUpperCase() + cat.slice(1)}** [${client.commands.filter(cmd => cmd.category === cat).size}] \n${commands(cat)}`)
+        .map(cat => stripIndents`**${cat[0].toUpperCase() + cat.slice(1)}** [${commands(cat).length}] \n${commands(cat)}`)
         .reduce((string, category) => string + "\n" + category);
 
-    return message.channel.send(embed.setDescription(`Môj prefix je ${in_prefix}\n` + info).setFooter(`karot.xyz - ${Date.now() - message.createdTimestamp}ms`));
+    return message.channel.send(embed.setDescription(info).setFooter(`karot.xyz - ${Date.now() - message.createdTimestamp}ms`));
 }
 
 function getCMD(client, message, input) {

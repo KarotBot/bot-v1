@@ -1,10 +1,17 @@
 const Discord = require("discord.js")
+const { prefix } = require("../../config.json");
+const db = require("quick.db");
 
 module.exports = {
     name: 'kick',
     description: 'Tímhle můžeš kickovat ty svině!',
+    usage: "kick <človek> [dôvod]",
     category: "moderace",
     async execute(client, message, args) {
+            var in_prefix = prefix;
+            if (db.has(message.guild.id)) {
+                in_prefix = db.get(message.guild.id);
+            }
           if(!message.member.hasPermission('KICK_MEMBERS'))
           if(!message.member.hasPermission('ADMINISTRATOR'))
             return message.channel.send(`<:kt_pain:822491637023899678> Nemáš permisie!`)
@@ -39,14 +46,14 @@ module.exports = {
               } else {
 
                 var nenitu = new Discord.MessageEmbed()
-                .addField('<:kt_nesuhlas:822475199755583488> Niečo sa pokazilo', 'Musíš niekoho označiť vo formáte `+kick [človek] [dôvod].`')
+                .addField('<:kt_nesuhlas:822475199755583488> Niečo sa pokazilo', `Musíš niekoho označiť vo formáte \`${in_prefix}${client.commands.get("kick").usage}.\``)
                 .setColor('#e54918')
                 message.channel.send(nenitu);
               }
 
             } else {
               var nenitu2 = new Discord.MessageEmbed()
-              .addField('<:kt_nesuhlas:822475199755583488> Niečo sa pokazilo', 'Musíš niekoho označiť vo formáte `+kick [človek] [dôvod].`')
+              .addField('<:kt_nesuhlas:822475199755583488> Niečo sa pokazilo', `Musíš niekoho označiť vo formáte \`${in_prefix}${client.commands.get("kick").usage}.\``)
               .setColor('#e54918')
               message.channel.send(nenitu2);
             }

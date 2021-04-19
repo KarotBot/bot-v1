@@ -19,14 +19,14 @@ module.exports = {
         .setFooter("Vyhrál jsi!", message.author.displayAvatarURL)
         .setTitle(':slot_machine:Slots:slot_machine:')
         .addField('Výsledek:', slots[result1] + slots[result2] + slots[result3], true)
-        .setColor('#e54918');
+        .setColor("#fcec14");
       message.channel.send(wEmbed);
     } else {
       let embed = new Discord.MessageEmbed()
         .setFooter('Prohrál jsi!', message.author.displayAvatarURL)
         .setTitle(':slot_machine:Slots:slot_machine:')
         .addField('Výsledek', slots[result1] + slots[result2] + slots[result3], true)
-        .setColor('#e54918')
+        .setColor("#fc1414");
       message.channel.send(embed);
     }
   }

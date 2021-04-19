@@ -16,31 +16,31 @@ module.exports = {
 
     const happyrate = new Discord.MessageEmbed()
       .setDescription(`**${m421}** bych rozhodně dal ${result}/100 ❤`)
-      .setColor('#e54918')
+      .setColor(`GREEN`)
 
     const sadembed = new Discord.MessageEmbed()
       .setDescription(`Myslím si, že ${result}/100 je vhodné skóre pro **${m421}**`)
-      .setColor('#e54918')
+      .setColor(`GREEN`)
 
     const idkembed = new Discord.MessageEmbed()
       .setDescription(`**${m421}** si zaslouží ${result}/100, nesuď mě.`)
-      .setColor('#e54918')
+      .setColor(`GREEN`)
 
     const shrugembed = new Discord.MessageEmbed()
       .setDescription(`**${m421}** je jasných ${result}/100`)
-      .setColor('#e54918')
+      .setColor(`GREEN`)
 
     const okembed = new Discord.MessageEmbed()
       .setDescription(`${result}/100 pro **${m421}**`)
-      .setColor('#e54918')
+      .setColor(`GREEN`)
 
     const thumbupembed = new Discord.MessageEmbed()
       .setDescription(`**${m421}** má ${result}/100. Nic víc, nic míň.👍`)
-      .setColor('#e54918')
+      .setColor(`GREEN`)
 
     const eyesembed = new Discord.MessageEmbed()
       .setDescription(`**${m421}** dostane ${result}/100 👀`)
-      .setColor('#e54918')
+      .setColor(`GREEN`)
 
     if (result > 90) return message.channel.send(happyrate)
     if (result < 30) return message.channel.send(sadembed)

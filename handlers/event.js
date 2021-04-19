@@ -4,7 +4,7 @@ const ascii = require("ascii-table");
 
 let table = new ascii("Eventy");
 table.setHeading("Event", "Načítací stav");
-module.exports => {
+module.exports = (client) => {
     readdirSync("./events").forEach(dir => {
         const events = readdirSync(`./events/`).filter(file => file.endsWith(".js"));
 

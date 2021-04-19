@@ -4,7 +4,7 @@ const axios = require("axios")
 module.exports = {
   name: 'ratewaifu',
   description: 'Ohodnotí tvou waifu',
-  aliases: ['rw'],
+  aliases: ['rw','ratewaifu'],
   cooldown: 4,
   category: "zabava",
   async execute(client, message, args) {
@@ -16,31 +16,31 @@ module.exports = {
 
     const happyrate = new Discord.MessageEmbed()
       .setDescription(`**${m421}** bych rozhodně dal ${result}/100 ❤`)
-      .setColor(`GREEN`)
+      .setColor(`RANDOM`)
 
     const sadembed = new Discord.MessageEmbed()
       .setDescription(`Myslím si, že ${result}/100 je vhodné skóre pro **${m421}**`)
-      .setColor(`GREEN`)
+      .setColor(`RANDOM`)
 
     const idkembed = new Discord.MessageEmbed()
       .setDescription(`**${m421}** si zaslouží ${result}/100, nesuď mě.`)
-      .setColor(`GREEN`)
+      .setColor(`RANDOM`)
 
     const shrugembed = new Discord.MessageEmbed()
       .setDescription(`**${m421}** je jasných ${result}/100`)
-      .setColor(`GREEN`)
+      .setColor(`RANDOM`)
 
     const okembed = new Discord.MessageEmbed()
       .setDescription(`${result}/100 pro **${m421}**`)
-      .setColor(`GREEN`)
+      .setColor(`RANDOM`)
 
     const thumbupembed = new Discord.MessageEmbed()
       .setDescription(`**${m421}** má ${result}/100. Nic víc, nic míň.👍`)
-      .setColor(`GREEN`)
+      .setColor(`RANDOM`)
 
     const eyesembed = new Discord.MessageEmbed()
       .setDescription(`**${m421}** dostane ${result}/100 👀`)
-      .setColor(`GREEN`)
+      .setColor(`RANDOM`)
 
     if (result > 90) return message.channel.send(happyrate)
     if (result < 30) return message.channel.send(sadembed)

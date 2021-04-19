@@ -1,6 +1,6 @@
 module.exports = {
     name: "guildCreate",
-    run: async (guild) ´=> {
+    run: async (guild) => {
     	const webhook = new Discord.WebhookClient("abc", "abc"); // Webhook
 
     	var whem = new Discord.MessageEmbed() // Embed

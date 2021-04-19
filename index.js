@@ -21,7 +21,7 @@ client.categories = fs.readdirSync("./commands/");
 	require(`./handlers/${handler}`)(client);
 });
 
-client.on('ready', () => client.events.get("ready").run());
+client.on('ready', () => client.events.get("ready").run(client));
 
 client.on('message', async(message) => {
 	if (message.content === "<@822391645697212416>" || message.content === "<@!822391645697212416>") {

@@ -8,10 +8,6 @@ module.exports = {
     usage: "ban <člověk> [dôvod]",
     category: "moderace",
     async execute(client, message, args) {
-        var in_prefix = prefix;
-        if (db.has(message.guild.id)) {
-            in_prefix = db.get(message.guild.id);
-        }
       if(!message.member.hasPermission("BAN_MEMBERS"))
       if(!message.member.hasPermission("ADMINISTRATOR"))
       return message.channel.send(`<:kt_pain:822491637023899678> Nemáš permisie!`)
@@ -47,10 +43,13 @@ module.exports = {
       })
     }}
 
-    var rip = new Discord.MessageEmbed()
+    /*var rip = new Discord.MessageEmbed()
     .addField('<:kt_nesuhlas:822475199755583488> Niečo sa pokazilo', 'Nemôžem vyhodiť seba.')
     .setColor('#e54918')
-
+    var in_prefix = prefix;
+    if (db.has(message.guild.id)) {
+        in_prefix = db.get(message.guild.id);
+    }
     var nenitu = new Discord.MessageEmbed()
     .addField('<:kt_nesuhlas:822475199755583488> Niečo sa pokazilo', `Musíš niekoho označiť vo formáte \`${in_prefix}${client.commands.get("ban").usage}\``)
     .setColor('#e54918')
@@ -66,3 +65,4 @@ module.exports = {
     var errorembed = new Discord.MessageEmbed()
     .addField('<:kt_nesuhlas:822475199755583488> Niečo sa pokazilo')
     .setColor('#e54918')
+*/

@@ -29,9 +29,9 @@ function getAll(client, message) {
             .join(", ");
     }
 
-    const info = `**Nezařazené** [${commands(undefined).length}] \n${commands(undefined)}` + client.categories
+    const info = `**Nezařazené** [${client.commands.filter(cmd => cmd.category === undefined).size}] \n${commands(undefined)}` + client.categories
         .filter(cat => cat !== "dev")
-        .map(cat => stripIndents`**${cat[0].toUpperCase() + cat.slice(1)}** [${commands(cat).length}] \n${commands(cat)}`)
+        .map(cat => stripIndents`**${cat[0].toUpperCase() + cat.slice(1)}** [${client.commands.filter(cmd => cmd.category === cat).size}] \n${commands(cat)}`)
         .reduce((string, category) => string + "\n" + category);
 
     return message.channel.send(embed.setDescription(info).setFooter(`karot.xyz - ${Date.now() - message.createdTimestamp}ms`));

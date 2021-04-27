@@ -1,27 +1,27 @@
 <div align="center">
     <a href="https://karot.xyz"><img src="https://karot.xyz/assets/karot.png" height="200" width="200"></a>
     <h1>Karot</h1>
-    <strong>Karot je slovenský Discord bot zameraný na rôzne moderačné, zábavné a informačné príkazy.</strong><br><br>
+    <strong>Karot is a Slovak Discord bot that has a lot of fun, moderation & informational commands.</strong><br><br>
     <img src="https://forthebadge.com/images/badges/built-with-love.svg" height="30">&nbsp;
     <img src="https://forthebadge.com/images/badges/made-with-javascript.svg" height="30">&nbsp;
 </div>
 
 ---
 
-**Karot je open source Discord bot založený na Discord.js čo obsahuje rôzne moderačné, zábavné a informačné príkazy.**
+**Karot is an open source Discord bot based on Discord.js that has loads of fun, moderation & information commands to cheer up your server!**
 
-## Dôležité informácie
+## Important info
 
-* **Predvolený prefix:** ! <br>
-* **Webstránky:** www.karot.xyz
-* **Oficiálny Discord server:** [9Byp7mWfMF](https://discord.com/invite/9Byp7mWfMF)
-* **Hlavný správca/vlastník bota:** [Slenky](https://github.com/Slenkston)
+* **Default prefix** ! <br>
+* **Web:** www.karot.xyz
+* **Support server:** [9Byp7mWfMF](https://discord.com/invite/9Byp7mWfMF)
+* **Owner:** [Slenky](https://github.com/Slenkston)
 
-## Kontribúcie
+## Contributing
 
-Ak si prajete kontributovať ku projektu budeme veľmi radi. <br>
-Za odmenu si môžete vyžiadať Discord rolu Octocat takže určite sa pred kontribúciou pripojte na náš [Discord server](https://discord.com/invite/9Byp7mWfMF) a do pull requestu špecifikujte svoje Discord meno a tag/diskriminátor alebo svoje Discord ID.
+If you want to contribute we'll be very happy! <br>
+As a reward for contributing you can claim the Octocat role in our [Discord server](https://discord.com/invite/9Byp7mWfMF) so plese put your Discord username and/or Discord ID into the pull request title/description.
 
-## Self hostovanie
+## Self hosting
 
-Self hostovanie bota nie je zakázané ale nebude dostávať žiadnu podporu v prípade problému a taktiež ho neodporúčame.
+Self hosting of the bot isn't disallowed but it is not recommended and no support will be provided for it. Also please do not host public versions of the bot, instead link any potential users to the main page @ karot.xyz.

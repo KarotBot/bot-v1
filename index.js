@@ -7,18 +7,18 @@ const db = require("quick.db");
 const os = require('os');
 const blacklistTable = new db.table("blacklist");
 const express = require('express');
-const app = express();
+var app = express()
 
-
-app.get('', async (req, res) => { // stats.karot.xyz
-	res.json({
-		status: '200',
-		guilds: `${client.guilds.cache.size}`,
-		users: `${client.users.cache.size}`,
-		channels: `${client.channels.cache.size}`
-	})
+app.get('/', async (req, res) => { // stats.karot.xyz
+     res.header("Access-Control-Allow-Origin", "*");
+    res.json({
+        status: '200',
+        guilds: `${client.guilds.cache.size}`,
+        users: `${client.users.cache.size}`,
+        channels: `${client.channels.cache.size}`
+    })
 })
-	
+    
 app.listen(3000);
 
 const client = new Client({
@@ -26,15 +26,14 @@ const client = new Client({
 });
 
 const cooldowns = new Collection();
-client.commands = new Collection();
+client.ncommands = new Collection();
 client.events = new Collection();
 client.aliases = new Collection();
 
 client.categories = fs.readdirSync("./commands/");
 
-["command", "event"].forEach(handler => {
-	require(`./handlers/${handler}`)(client);
-});
+require(`./handlers/command`)(client);
+require(`./handlers/event`)(client);
 
 client.on('ready', () => client.events.get("ready").run(client));
 
@@ -43,6 +42,7 @@ client.on('message', async(message) => {
         await message.react("<:kt_hey:822468640103202858>");
     }
 	var in_prefix = prefix;
+    console.log(in_prefix)
 	if (message.guild && db.has(message.guild.id)) {
 		in_prefix = db.get(message.guild.id);
 	}
@@ -64,11 +64,13 @@ client.on('message', async(message) => {
 		return message.author.send(embed);
 	}
 
+ 
 	const args = message.content.slice(in_prefix.length).trim().split(/ +/);
 	const commandName = args.shift().toLowerCase();
 
-	const command = client.commands.get(commandName)
-		|| client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
+	const command = client.ncommands.get(commandName)
+		|| client.ncommands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
+    console.log(command, commandName)
 
 	if (!command) return;
 
@@ -95,10 +97,17 @@ client.on('message', async(message) => {
 
 	timestamps.set(message.author.id, now);
 	setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
-
+ 
+    if(command.requiredRole) {
+                        if(!message.member._roles.includes(command.requiredRole)) {
+                            return;
+                        }
+                    }
+    
 	try {
 		command.execute(client, message, args);
-	}catch{
+	}catch(e){
+        console.log(e)
 		console.log('Error ¯\_(ツ)_/¯');
 	}
 });

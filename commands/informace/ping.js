@@ -6,7 +6,7 @@ module.exports = {
     category: "informace",
     async execute(client, message, args) {
         var embed = new Discord.MessageEmbed()
-        .setTitle('<:kt_hey:822468640103202858>︱Môj ping')
+        .setTitle('<:kt_hey:822468640103202858> My ping:')
         .setColor('#e54918')
         .setDescription(`${Date.now() - message.createdTimestamp}ms`)
         .setFooter('karot.xyz')
@@ -16,4 +16,3 @@ module.exports = {
         );
     }
 }
-//console.log("Načítavam merač mojej latencioš. ~(˘▾˘~)")

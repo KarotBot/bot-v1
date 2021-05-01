@@ -1,58 +1,28 @@
-const { MessageEmbed } = require("discord.js");
-const { stripIndents } = require("common-tags");
-const { prefix } = require("../../config.json");
-const Discord = require("discord.js");
+const Discord = require('discord.js')
 
 module.exports = {
-    name: 'help',
-    aliases: ['pomoc', 'prikazy', 'príkazy'],
-    description: 'Pošle moje príkazy',
-    category: "informace",
-    async execute(client, message, args) {
-        if (args[0]) {
-            return getCMD(client, message, args[0]);
-        } else {
-            return getAll(client, message);
-        }
-    }
-}
+	name: 'help',
+	description: 'Experimental help command',
+    aliases: ['sos', 'commands', 'prikazy', 'pomoc'],
+	cooldown: 4,
+	category: "informace",
+    	async execute(client, message, args) {
 
-function getAll(client, message) {
-    const embed = new MessageEmbed()
-        .setColor("#e54918")
-        .setTitle("<:kt_job:822478953939599390> | List príkazov")
-
-    const commands = (category) => {
-        return client.commands
-            .filter(cmd => cmd.category === category && cmd.category !== "dev")
-            .map(cmd => `\`${cmd.name}\``)
-            .join(", ");
-    }
-
-    const info = `**Nezařazené** [${client.commands.filter(cmd => cmd.category === undefined).size}] \n${commands(undefined)}` + client.categories
-        .filter(cat => cat !== "dev")
-        .map(cat => stripIndents`**${cat[0].toUpperCase() + cat.slice(1)}** [${client.commands.filter(cmd => cmd.category === cat).size}] \n${commands(cat)}`)
-        .reduce((string, category) => string + "\n" + category);
-
-    return message.channel.send(embed.setDescription(info).setFooter(`karot.xyz - ${Date.now() - message.createdTimestamp}ms`));
-}
-
-function getCMD(client, message, input) {
-    const embed = new MessageEmbed()
-
-    const cmd = client.commands.get(input.toLowerCase()) || client.commands.get(client.aliases.get(input.toLowerCase()));
-
-    let info = `Nebyly nalezeny žádné informace pro příkaz **${input.toLowerCase()}**`;
-
-    if (!cmd) {
-        return message.channel.send(embed.setColor("RED").setDescription(info));
-    }
-
-    if (cmd.name) info = `**Jméno příkazu**: ${cmd.name}`;
-    if (cmd.aliases) info += `\n**Aliasy**: ${cmd.aliases.map(a => `\`${a}\``).join(", ")}`;
-    if (cmd.description) info += `\n**Popis**: ${cmd.description}`;
-    if (cmd.usage) {
-        info += `\n**Použití**: ${cmd.usage}`;
-        embed.setFooter(`Syntaxe: <> = povinné, [] = dobrovolné`);
-    }
-}
+    var embed = new Discord.MessageEmbed()
+	.setColor("#e54918")
+    .setURL("https://karot.xyz")
+	.setTitle('Karot Commands')
+	.addFields(
+		{ name: '<:kt_hey:822468640103202858> Informational', value: '`help`, `info`, `invite`, `ping`, `serverinfo`', inline: true },
+        { name: '<:kt_suhlas:822473993780068393> Configuration', value: '`prefix`, `embed`', inline: true },
+        { name: '<:kt_job:822478953939599390> Moderation', value: '`ban`, `kick`', inline: true },
+		{ name: '<:kt_pepega:822475395281715250> Fun', value: '`meme`, `reddit`, `dog`, `cat`, `duck`, `furret`, `slots`, `ratewaifu`, `starterpack`, `number`, `airpods`, `status`, `carrot`, `pewdiepie`, `duklock`, `siryakari`, `status`, `rocketleague`, `minecraft`, `fortnite`, `roblox`', inline: true },
+        { name: '\u200B', value: '\u200B' },
+        { name: 'Links', value: '[Support server](https://discord.com/invite/9Byp7mWfMF) - [Add the Bot](https://discord.com/oauth2/authorize?client_id=822391645697212416&permissions=388166&redirect_uri=https%3A%2F%2Fauth.karot.xyz&response_type=code&scope=bot%20applications.commands) - [Website](https://karot.xyz) - [GitHub](https://github.com/KarotBot)'},
+	)
+    .setFooter(`karot.xyz - ${Date.now() - message.createdTimestamp}ms`);
+         message.channel.send(embed)
+         .catch(error =>
+            console.log("Nejaký čurák mi zobral permisie... >:0")
+        );
+    }}

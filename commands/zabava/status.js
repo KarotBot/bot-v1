@@ -9,7 +9,6 @@ module.exports = {
     	async execute(client, message, args) {
         var buff = (await axios({
             url: new URL("https://api.hyrousek.tk/useless/reddit?reddit=FunnyDiscordStatus").toString(),
-            headers: {"Authorization":"say goodbye"},
             responseType: "json"
         })).data;
 

@@ -7,7 +7,7 @@ module.exports = {
 	category: "dev",
 	cooldown: 4,
     	async execute(client, message, args) {
-    if (!["403500416631046145", "492012102245154827"].includes(message.author.id)) return;
+    if (!["403500416631046145", "492012102245154827", "747786245840830496"].includes(message.author.id)) return;
 
     try {
         var code = args.join(" ");

@@ -2,13 +2,13 @@ const Discord = require('discord.js')
 const axios = require("axios")
 
 module.exports = {
-	name: 'duklock',
+	name: 'pewdiepie',
 	description: 'Posle meme',
-	cooldown: 4,
 	category: "zabava",
+	cooldown: 4,
     	async execute(client, message, args) {
         var buff = (await axios({
-            url: new URL("https://api.hyrousek.tk/useless/reddit?reddit=duklock").toString(),
+            url: new URL("https://api.hyrousek.tk/useless/reddit?reddit=PewdiepieSubmissions").toString(),
             responseType: "json"
         })).data;
 

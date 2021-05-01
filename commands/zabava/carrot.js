@@ -1,14 +1,17 @@
+
 const Discord = require('discord.js')
 const axios = require("axios")
 
 module.exports = {
-	name: 'duklock',
-	description: 'Posle meme',
+	name: 'carrot',
+	description: 'Posle carrot',
+  aliases: ['karot', 'karotka', 'carot', 'mrkvicka', 'mrkva'],
 	cooldown: 4,
 	category: "zabava",
     	async execute(client, message, args) {
         var buff = (await axios({
-            url: new URL("https://api.hyrousek.tk/useless/reddit?reddit=duklock").toString(),
+            url: new URL("https://api.hyrousek.tk/useless/reddit?reddit=carrots").toString(),
+            headers: {"Authorization":"ZEh5rpaRvp8c0hdAhix0jSfnsHe58LEI"},
             responseType: "json"
         })).data;
 
@@ -22,4 +25,5 @@ module.exports = {
          .catch(error =>
           console.log("Nejaký čurák mi zobral permisie... >:0")
       );
-    }}
+    }
+}

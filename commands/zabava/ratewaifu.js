@@ -10,36 +10,36 @@ module.exports = {
   async execute(client, message, args) {
     // ported from hernikplays/m00n
     let m421 = args.join(" ");
-    if (!m421) return message.channel.send("Pokud nemáš waifu, nemůžu ji hodnotit.")
-    if (m421.length > 30) return message.channel.send(`Tvoje waifu je moc dlouhá!`)
+    if (!m421) return message.channel.send("If you don't have a waifu, I can't rate her.")
+    if (m421.length > 30) return message.channel.send(`Your waifu is too long! <:kt_pain:822491637023899678>`)
     let result = Math.floor((Math.random() * 100) + 0);
 
     const happyrate = new Discord.MessageEmbed()
-      .setDescription(`**${m421}** bych rozhodně dal ${result}/100 ❤`)
+      .setDescription(`I would give **${m421}** a ${result}/100 ❤`)
       .setColor(`GREEN`)
 
     const sadembed = new Discord.MessageEmbed()
-      .setDescription(`Myslím si, že ${result}/100 je vhodné skóre pro **${m421}**`)
+      .setDescription(`I think that ${result}/100 is a good score for **${m421}**.`)
       .setColor(`GREEN`)
 
     const idkembed = new Discord.MessageEmbed()
-      .setDescription(`**${m421}** si zaslouží ${result}/100, nesuď mě.`)
+      .setDescription(`**${m421}** deserves a ${result}/100, don't judge me.`)
       .setColor(`GREEN`)
 
     const shrugembed = new Discord.MessageEmbed()
-      .setDescription(`**${m421}** je jasných ${result}/100`)
+      .setDescription(`**${m421}** is a clear ${result}/100`)
       .setColor(`GREEN`)
 
     const okembed = new Discord.MessageEmbed()
-      .setDescription(`${result}/100 pro **${m421}**`)
+      .setDescription(`${result}/100 for **${m421}**`)
       .setColor(`GREEN`)
 
     const thumbupembed = new Discord.MessageEmbed()
-      .setDescription(`**${m421}** má ${result}/100. Nic víc, nic míň.👍`)
+      .setDescription(`**${m421}** gets a ${result}/100. Nothing more, nothing less! 👍`)
       .setColor(`GREEN`)
 
     const eyesembed = new Discord.MessageEmbed()
-      .setDescription(`**${m421}** dostane ${result}/100 👀`)
+      .setDescription(`**${m421}** gets ${result}/100 👀`)
       .setColor(`GREEN`)
 
     if (result > 90) return message.channel.send(happyrate)

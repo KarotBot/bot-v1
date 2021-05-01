@@ -2,13 +2,14 @@ const Discord = require('discord.js')
 const axios = require("axios")
 
 module.exports = {
-	name: 'duklock',
+	name: 'furret',
 	description: 'Posle meme',
+    aliases: ['fretka'],
 	cooldown: 4,
 	category: "zabava",
     	async execute(client, message, args) {
         var buff = (await axios({
-            url: new URL("https://api.hyrousek.tk/useless/reddit?reddit=duklock").toString(),
+            url: new URL("https://api.hyrousek.tk/useless/reddit?reddit=furrets").toString(),
             responseType: "json"
         })).data;
 
@@ -20,6 +21,6 @@ module.exports = {
             .setFooter(`karot.xyz - ${Date.now() - message.createdTimestamp}ms`)
          message.channel.send(embed)
          .catch(error =>
-          console.log("Nejaký čurák mi zobral permisie... >:0")
-      );
+            console.log("Nejaký čurák mi zobral permisie... >:0")
+        );
     }}

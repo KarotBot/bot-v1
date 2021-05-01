@@ -9,7 +9,7 @@ module.exports = {
     	async execute(client, message, args) {
         var buff = (await axios({
             url: new URL("https://api.hyrousek.tk/useless/reddit?reddit=starterpacks").toString(),
-            headers: {"Authorization":"API Starterpack nie je v cene"},
+            headers: {"Authorization":"ZEh5rpaRvp8c0hdAhix0jSfnsHe58LEI"},
             responseType: "json"
         })).data;
 

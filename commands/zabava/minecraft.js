@@ -10,7 +10,6 @@ module.exports = {
     	async execute(client, message, args) {
         var buff = (await axios({
             url: new URL("https://api.hyrousek.tk/useless/reddit?reddit=minecraft").toString(),
-            headers: {"Authorization":"zmizni"},
             responseType: "json"
         })).data;
 

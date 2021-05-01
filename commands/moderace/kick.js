@@ -5,7 +5,7 @@ const db = require("quick.db");
 module.exports = {
     name: 'kick',
     description: 'Tímhle můžeš kickovat ty svině!',
-    usage: "kick <človek> [dôvod]",
+    usage: "kick <user> [reason]",
     category: "moderace",
     async execute(client, message, args) {
             var in_prefix = prefix;
@@ -14,7 +14,7 @@ module.exports = {
             }
           if(!message.member.hasPermission('KICK_MEMBERS'))
           if(!message.member.hasPermission('ADMINISTRATOR'))
-            return message.channel.send(`<:kt_pain:822491637023899678> Nemáš permisie!`)
+            return message.channel.send(`<:kt_pain:822491637023899678> You don't have permissions!`)
             var reason = args.slice(1).join(" ");
             const user = message.mentions.users.first();
 
@@ -23,21 +23,21 @@ module.exports = {
               const member = message.guild.member(user);
               var samokick = new Discord.MessageEmbed()
               .setColor('#e54918')
-              .addField('<:kt_nesuhlas:822475199755583488> Niečo sa pokazilo', 'Nemôžeš vyhodiť sám seba.')
+              .addField('<:kt_nesuhlas:822475199755583488> Something went wrong...', 'I cannot ban myself.')
               if(member.user.id === message.author.id) return message.channel.send(samokick)
               if(member.user.id === "822391645697212416") return message.channel.send(rip)
               if (member) {
                 member.kick(`${message.author.tag} - ` + args.slice(1).join(" ")).then(() => {
 
                   var embed = new Discord.MessageEmbed()
-                  .addField(`<:kt_suhlas:822473993780068393> ${member.user.tag} bol vyhodený.`, `‎‎‎‎‎‎‏‏‎ ‎`)
-                  .addField(`**Dôvod:**`,` ${reason || "Nebol uvedený"}`)
+                  .addField(`<:kt_suhlas:822473993780068393> ${member.user.tag} was kicked.`, `‎‎‎‎‎‎‏‏‎ ‎`)
+                  .addField(`**Reason::**`,` ${reason || "Wasn't specified"}`)
                   .setColor('#e54918')
                   message.channel.send(embed)
                 }).catch(err => {
 
                   var errorembed = new Discord.MessageEmbed()
-                  .addField('<:kt_nesuhlas:822475199755583488> Niečo sa pokazilo', err)
+                  .addField('<:kt_nesuhlas:822475199755583488> Something went wrong...', err)
                   .setColor('#e54918')
                   message.channel.send(errorembed);
 
@@ -46,14 +46,14 @@ module.exports = {
               } else {
 
                 var nenitu = new Discord.MessageEmbed()
-                .addField('<:kt_nesuhlas:822475199755583488> Niečo sa pokazilo', `Musíš niekoho označiť vo formáte \`${in_prefix}${client.commands.get("kick").usage}.\``)
+                .addField('<:kt_nesuhlas:822475199755583488> Niečo sa pokazilo', `You must mention someone in the format \`${in_prefix}${client.commands.get("kick").usage}.\``)
                 .setColor('#e54918')
                 message.channel.send(nenitu);
               }
 
             } else {
               var nenitu2 = new Discord.MessageEmbed()
-              .addField('<:kt_nesuhlas:822475199755583488> Niečo sa pokazilo', `Musíš niekoho označiť vo formáte \`${in_prefix}${client.commands.get("kick").usage}.\``)
+              .addField('<:kt_nesuhlas:822475199755583488> Niečo sa pokazilo', `You must mention someone in the format \`${in_prefix}${client.commands.get("kick").usage}.\``)
               .setColor('#e54918')
               message.channel.send(nenitu2);
             }
@@ -62,5 +62,5 @@ module.exports = {
         }}
 
         var rip = new Discord.MessageEmbed()
-        .addField('<:kt_nesuhlas:822475199755583488> Niečo sa pokazilo', 'Nemôžem vyhodiť seba.')
+        .addField('<:kt_nesuhlas:822475199755583488> Niečo sa pokazilo', 'I cannot kick myself.')
         .setColor('#e54918')

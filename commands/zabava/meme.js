@@ -9,7 +9,6 @@ module.exports = {
     	async execute(client, message, args) {
         var buff = (await axios({
             url: new URL("https://api.hyrousek.tk/images/meme").toString(),
-            headers: {"Authorization":"to sa nestane"},
             responseType: "json"
         })).data;
 
@@ -20,7 +19,7 @@ module.exports = {
             .setTitle(buff.title)
             .setFooter(`karot.xyz - ${Date.now() - message.createdTimestamp}ms`)
          message.channel.send(embed)
-         .catch(error =>
-          console.log("Nejaký čurák mi zobral permisie... >:0")
+         .catch(err =>
+          console.log(err)
       );
     }}

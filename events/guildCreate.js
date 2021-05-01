@@ -1,7 +1,11 @@
+const Discord = require("discord.js");
+const db = require("quick.db");
+
 module.exports = {
     name: "guildCreate",
     run: async (guild) => {
-    	const webhook = new Discord.WebhookClient("abc", "abc"); // Webhook
+        const blacklistTable = new db.table("blacklist");
+    	const webhook = new Discord.WebhookClient("ID", "TOKEN"); // Webhook
 
     	var whem = new Discord.MessageEmbed() // Embed
     	.setColor('#e54918')
@@ -25,7 +29,15 @@ module.exports = {
     	if (blacklistTable.all().filter(datatable => datatable.ID === "guilds" && datatable.data.blacklisted && datatable.data.blacklisted.includes(guild.id)).length > 0) {
     		guild.leave();
     		const owner = guild.owner;
-    		owner.send("Dostali ste zákaz používať služby Karot na Vašom Discord serveri " + guild.name + ". Ak si myslíte, že je tento trest nespravodlivý/chybný, môžete sa odvolať [tu](https://bit.ly/karotodvolanie).");
+    		const embed = new Discord.MessageEmbed()
+                   		.setColor("#e54918")
+                   		.setAuthor(owner.user.tag, owner.user.avatarURL({ size: 128, dynamic: true }))
+                   		.setTitle("Banned")
+            			.addField("Your guild " + guild.name + " was banned from using the services of Karot.", "If you think that this punishment is false, you can appeal the decission [here](https://forms.gle/vBra2ZnmGvG88wDo9).")
+                        .addField("Please review the TOS", "You were most likely banned for a violation of the terms of service of Karot.\nPlease read them [here](https://karot.xyz/terms)")
+                   		.setFooter("karot.xyz")
+                   		.setTimestamp();
+                   owner.send(embed);
     	}
     }
 }

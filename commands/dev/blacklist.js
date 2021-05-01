@@ -9,7 +9,7 @@ module.exports = {
     category: "dev",
     usage: "blacklist <guild | user> [list | add | remove] [id]",
     execute: async (client, message, args) => {
-        if (!["403500416631046145"].includes(message.author.id)) return;
+        if (!["403500416631046145", "747786245840830496"].includes(message.author.id)) return;
 
         if (!args[0] && args[0] !== "guild" && args[0] !== "user") {
             return message.reply("Neplatná možnost");
@@ -31,12 +31,22 @@ function getList(client, message, input) {
     var enlisted;
     if (input[0] === "guild") {
         enlisted = blacklistTable.all().filter(table => table.ID === "guilds");
-        enlisted = enlisted.data.blacklisted;
-        enlisted.reduce((prev, curr) => prev + "\n" + curr);
+        if (!enlisted[0]) {
+            enlisted = [];
+        } else {
+        	enlisted = enlisted[0].data.blacklisted;
+        	enlisted = enlisted.reduce((prev, curr) => prev + "\n" + curr);
+        }
+        //enlisted = enlisted.data.blacklisted[0].data.blacklisted.reduce((prev, curr) => prev + "\n" + curr);
+        //console.log(enlisted.data.blacklisted[0]);
     } else if (input[0] === "user") {
         enlisted = blacklistTable.all().filter(table => table.ID === "users");
-        enlisted = enlisted.data.blacklisted;
-        enlisted.reduce((prev, curr) => prev + "\n" + curr);
+        if (!enlisted[0]) {
+            enlisted = [];
+        } else {
+        	enlisted = enlisted[0].data.blacklisted;
+        	enlisted = enlisted.reduce((prev, curr) => prev + "\n" + curr);
+        }
     }
     const embed = new MessageEmbed()
         .setColor("#e54918")
@@ -81,10 +91,11 @@ async function addGuild(client, message, input) {
     }
     var guild;
     try {
-        guild = client.guilds.cache.get(id);
+        guild = await client.guilds.fetch(id);
     } catch (e) {
         message.channel.send("Došlo k chybě" + e);
     }
+    console.log(guild);
     const msg = await message.channel.send(`Opravdu chcete přidat ${guild.name} (${guild.id}) na blacklist?`);
     const reaction = await promptMessage(msg, message.author, 30000, ["✅", "❌"]);
     if (reaction === "✅") {
@@ -111,7 +122,7 @@ async function remove(client, message, input) {
         const blacklistedGuilds = blacklistTable.all().filter(datatable => datatable.ID === "guilds");
         var guild;
         try {
-            guild = client.guilds.cache.get(id);
+            guild = await client.guilds.fetch(id);
         } catch (e) {
             message.channel.send("Došlo k chybě" + e);
         }

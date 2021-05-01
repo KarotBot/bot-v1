@@ -9,7 +9,6 @@ module.exports = {
     	async execute(client, message, args) {
         var buff = (await axios({
             url: new URL("https://api.hyrousek.tk/useless/reddit?reddit=siryakari").toString(),
-            headers: {"Authorization":"trospi19"},
             responseType: "json"
         })).data;
 

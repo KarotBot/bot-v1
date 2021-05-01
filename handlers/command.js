@@ -1,178 +1,119 @@
-﻿const { MessageEmbed } = require("discord.js");
-const { readdirSync } = require("fs");
+const fs = require('fs');
+const { GCommands } = require("gcommands");
+const Discord = require('discord.js');
+const { Client, Collection } = require('discord.js');
+const { prefix, token } = require('./config.json');
+const db = require("quick.db");
+const os = require('os');
+const blacklistTable = new db.table("blacklist");
+const express = require('express');
+var app = express()
 
-const ascii = require("ascii-table");
+app.get('/', async (req, res) => { // stats.karot.xyz
+     res.header("Access-Control-Allow-Origin", "*");
+    res.json({
+        status: '200',
+        guilds: `${client.guilds.cache.size}`,
+        users: `${client.users.cache.size}`,
+        channels: `${client.channels.cache.size}`
+    })
+})
+    
+app.listen(3000);
 
-let table = new ascii("Příkazy");
-table.setHeading("Příkaz", "Načítací stav");
+const client = new Client({
+	disableMentions: 'everyone'
+});
 
-module.exports = (client) => {
-    readdirSync("./commands/").forEach(dir => {
-        const commands = readdirSync(`./commands/${dir}/`).filter(file => file.endsWith(".js"));
+const cooldowns = new Collection();
+client.ncommands = new Collection();
+client.events = new Collection();
+client.aliases = new Collection();
 
-        for (let file of commands) {
-            let pull = require(`../commands/${dir}/${file}`);
-            let commandStructure = { named: false, categorized: false, descriptioned: false, haveUsage: false };
+client.categories = fs.readdirSync("./commands/");
 
-            if (pull.name) {
-                commandStructure.named = true;
-            }
-            if (pull.category) {
-                commandStructure.categorized = true;
-            }
-            if (pull.description) {
-                commandStructure.descriptioned = true;
-            }
-            if (pull.usage) {
-                commandStructure.haveUsage = true;
-            }
-            if (!client.commands.has(pull.name)) {
-                if (commandStructure.named && commandStructure.categorized && commandStructure.descriptioned && commandStructure.haveUsage) {
-                    client.commands.set(pull.name, pull);
-                    table.addRow(file, '✅');
-                } else if (commandStructure.named && commandStructure.categorized && commandStructure.descriptioned && !commandStructure.haveUsage) {
-                    client.commands.set(pull.name, pull);
-                    table.addRow(file, '⚠ -> nebylo nalezeno použití.');
-                } else if (commandStructure.named && commandStructure.categorized && !commandStructure.descriptioned && !commandStructure.haveUsage) {
-                    client.commands.set(pull.name, pull);
-                    table.addRow(file, '⚠ -> nebylo nalezeno použití, ani popis.');
-                } else if (commandStructure.named && commandStructure.categorized && !commandStructure.descriptioned && commandStructure.haveUsage) {
-                    client.commands.set(pull.name, pull);
-                    table.addRow(file, '⚠ -> nebyl nalezen popis.');
-                } else if (commandStructure.named && !commandStructure.categorized && !commandStructure.descriptioned && !commandStructure.haveUsage) {
-                    client.commands.set(pull.name, pull);
-                    table.addRow(file, '⚠ -> nebylo nalezeno použití, popis, ani kategorie.');
-                } else if (commandStructure.named && !commandStructure.categorized && !commandStructure.descriptioned && commandStructure.haveUsage) {
-                    client.commands.set(pull.name, pull);
-                    table.addRow(file, '⚠ -> nebyl nalezen popis, ani kategorie.');
-                } else if (commandStructure.named && !commandStructure.categorized && commandStructure.descriptioned && !commandStructure.haveUsage) {
-                    client.commands.set(pull.name, pull);
-                    table.addRow(file, '⚠ -> nebylo nalezeno použití, ani kategorie.');
-                } else if (commandStructure.named && !commandStructure.categorized && commandStructure.descriptioned && commandStructure.haveUsage) {
-                    client.commands.set(pull.name, pull);
-                    table.addRow(file, '⚠ -> nebyla nalezena kategorie.');
-                } else if (!commandStructure.named && !commandStructure.categorized && !commandStructure.descriptioned && !commandStructure.haveUsage) {
-                    table.addRow(file, '❌ -> nebylo nalezeno použití, popis, kategorie, ani jméno; příkaz nenačten.');
-                } else if (!commandStructure.named && !commandStructure.categorized && !commandStructure.descriptioned && commandStructure.haveUsage) {
-                    table.addRow(file, '❌ -> nebyl nalezen popis, kategorie, ani jméno; příkaz nenačten.');
-                } else if (!commandStructure.named && !commandStructure.categorized && commandStructure.descriptioned && !commandStructure.haveUsage) {
-                    table.addRow(file, '❌ -> nebylo nalezeno použití, kategorie, ani jméno; příkaz nenačten.');
-                } else if (!commandStructure.named && !commandStructure.categorized && commandStructure.descriptioned && commandStructure.haveUsage) {
-                    table.addRow(file, '❌ -> nebyla nalezena kategorie, ani jméno; příkaz nenačten.');
-                } else if (!commandStructure.named && commandStructure.categorized && commandStructure.descriptioned && commandStructure.haveUsage) {
-                    table.addRow(file, '❌ -> nebylo nalezeno jméno; příkaz nenačten.');
-                } else {
-                    table.addRow(file, '❌ -> jiná chyba; příkaz nenačten');
-                }
-            } else {
-                table.addRow(file, '❌ -> tento příkaz již existuje; příkaz nenačten');
-            }
+require(`./handlers/command`)(client);
+require(`./handlers/event`)(client);
 
-            if (pull.aliases && Array.isArray(pull.aliases)) pull.aliases.forEach(alias => client.aliases.set(alias, pull.name));
-        }
-    });
-}
-// const Discord = require("discord.js")
-// const { play } = require("../../include/play");
-// const { YOUTUBE_API_KEY } = require("../../config.json");
-// const ytdl = require("ytdl-core");
-// const YouTubeAPI = require("simple-youtube-api");
-// const youtube = new YouTubeAPI("");
+client.on('ready', () => client.events.get("ready").run(client));
 
+client.on('message', async(message) => {
+    if (["bot", "boti", "botovi"].some(ms => message.content.toLowerCase().includes(ms.toLowerCase()))) {
+        await message.react("<:kt_hey:822468640103202858>");
+    }
+	var in_prefix = prefix;
+    console.log(in_prefix)
+	if (message.guild && db.has(message.guild.id)) {
+		in_prefix = db.get(message.guild.id);
+	}
+    
+             if (message.content === "<@822391645697212416>" || message.content === "<@!822391645697212416>") {
+		return message.channel.send(`**Hi, my name is Karot!** <:kt_hey:822468640103202858> \nMy prefix is \`${in_prefix}\`. Use the \`${in_prefix}help\` command if you want to find out what I can do!`);
+	}
+    
+  if (!message.content.startsWith(in_prefix) || message.author.bot) return;
+  	if (blacklistTable.all().filter(datatable => datatable.ID === "users" && datatable.data.blacklisted && datatable.data.blacklisted.includes(message.author.id)).length > 0) {
+		const embed = new Discord.MessageEmbed()
+			.setColor("#e54918")
+			.setAuthor(message.author.tag, message.author.avatarURL({ size: 128, dynamic: true }))
+			.setTitle("Banned")
+			.addField("You were banned from using the services of Karot.", "If you think that this punishment is false, you can appeal the decission [here](https://forms.gle/vBra2ZnmGvG88wDo9).")
+            .addField("Please review the TOS", "You were most likely banned for a violation of the terms of service of Karot.\nPlease read them [here](https://karot.xyz/terms)")
+			.setFooter(`karot.xyz - ${Date.now() - message.createdTimestamp}ms`)
+			.setTimestamp();
+		return message.author.send(embed);
+	}
 
-// module.exports = {
-//     name: "play",
-//     aliases: ["play", "p"],
-//     category: "music",
-//     usage: "",
-//     run: async (client, message, args, client.queue [To client.queue musí být aj v indexe]) => {
-//     const { channel } = message.member.voice;
+ 
+	const args = message.content.slice(in_prefix.length).trim().split(/ +/);
+	const commandName = args.shift().toLowerCase();
 
-//     if (!args.length) return message.reply(":x: Please write song name or url").catch(console.error);
-//     if (!channel) return message.reply(":x: You need to join a voice channel first!").catch(console.error);
+	const command = client.ncommands.get(commandName)
+		|| client.ncommands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
+    console.log(command, commandName)
 
-//     const permissions = channel.permissionsFor(message.client.user);
-//     if (!permissions.has("CONNECT"))
-//       return message.reply(":x: Cannot connect to voice channel, missing permissions");
-//     if (!permissions.has("SPEAK"))
-//       return message.reply(":x: I cannot speak in this voice channel, make sure I have the proper permissions!");
+	if (!command) return;
 
-//     const search = args.join(" ");
-//     const videoPattern = /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.?be)\/.+$/gi;
-//     const playlistPattern = /^.*(list=)([^#\&\?]*).*/gi;
-//     const url = args[0];
-//     const urlValid = videoPattern.test(args[0]);
+	if (command.guildOnly && message.channel.type === 'dm') {
+		return;
+	}
 
-//     if (!videoPattern.test(args[0]) && playlistPattern.test(args[0])) {
-//       return message.channel.send(":x: Please write song name or url")
-//     }
+	if (!cooldowns.has(command.name)) {
+		cooldowns.set(command.name, new Discord.Collection());
+	}
 
-//     const serverQueue = message.client.queue.get(message.guild.id); - tu mi hádže že get is undefined keď v indexe ja mám že client.queue = new Map(); a tuto mi hádže proste get undefined lebo to moje vlastne tam to je ako ta collection na commans že client.commands = new DIscord.Collection(); skusim to
-//     const queueConstruct = {
-//       textChannel: message.channel,
-//       channel,
-//       connection: null,
-//       songs: [],
-//       loop: false,
-//       volume: 100,
-//       playing: true
-//     };
+	const now = Date.now();
+	const timestamps = cooldowns.get(command.name);
+	const cooldownAmount = (command.cooldown || 3) * 1000;
 
-//     let songInfo = null;
-//     let song = null;
+	if (timestamps.has(message.author.id)) {
+		const time = timestamps.get(message.author.id) + cooldownAmount;
 
-//     if (urlValid) {
-//       try {
-//         songInfo = await ytdl.getInfo(url);
-//         song = {
-//           title: songInfo.title,
-//           url: songInfo.video_url,
-//           duration: songInfo.length_seconds
-//         };
-//       } catch (error) {
-//         if (error.message.includes("copyright")) {
-//           return message
-//             .reply("⛔ The video could not be played due to copyright protection ⛔")
-//             .catch(console.error);
-//         } else {
-//           console.error(error);
-//         }
-//       }
-//     } else {
-//       try {
-//         const results = await youtube.searchVideos(search, 1);
-//         songInfo = await ytdl.getInfo(results[0].url);
-//         song = {
-//           title: songInfo.title,
-//           url: songInfo.video_url,
-//           duration: songInfo.length_seconds
-//         };
-//       } catch (error) {
-//         console.error(error);
-//       }
-//     }
+		if (now < time) {
+			const timeLeft = (time - now) / 1000;
+			return message.reply(`Please wait ${timeLeft.toFixed(1)} before using the command \`${command.name}\`.`);
+		}
+	}
 
-//     if (serverQueue) {
-//       serverQueue.songs.push(song);
-//       return serverQueue.textChannel
-//         .send(`✅ **${song.title}** has been added to the queue by ${message.author}`)
-//         .catch(console.error);
-//     } else {
-//       queueConstruct.songs.push(song);
-//     }
+	timestamps.set(message.author.id, now);
+	setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
+ 
+    if(command.requiredRole) {
+                        if(!message.member._roles.includes(command.requiredRole)) {
+                            return;
+                        }
+                    }
+    
+	try {
+		command.execute(client, message, args);
+	}catch(e){
+        console.log(e)
+		console.log('Error ¯\_(ツ)_/¯');
+	}
+});
 
-//     if (!serverQueue) message.client.queue.set(message.guild.id, queueConstruct);
+client.on('guildCreate', (guild) => client.events.get("guildCreate").run(guild));
 
-//     if (!serverQueue) {
-//       try {
-//         queueConstruct.connection = await channel.join();
-//         play(queueConstruct.songs[0], message);
-//       } catch (error) {
-//         console.error(`:x: Could not join voice channel: ${error}`);
-//         message.client.queue.delete(message.guild.id);
-//         await channel.leave();
-//         return message.channel.send(`:x: Could not join the channel: ${error}`).catch(console.error);
-//       }
-//     }
-//   }
-// };
+client.on("debug", async info => console.log(info));
+
+client.login(token);

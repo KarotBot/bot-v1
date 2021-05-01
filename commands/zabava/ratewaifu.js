@@ -4,7 +4,7 @@ const axios = require("axios")
 module.exports = {
   name: 'ratewaifu',
   description: 'Ohodnotí tvou waifu',
-  aliases: ['rw'],
+  aliases: ['rw','ratewaifu'],
   cooldown: 4,
   category: "zabava",
   async execute(client, message, args) {

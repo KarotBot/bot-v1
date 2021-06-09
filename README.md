@@ -28,9 +28,6 @@
 
 ### Please do not contribute anymore, very old code! If you still wish to contribute something, message me!
 
-If you want to contribute we'll be very happy! <br>
-As a reward for contributing you can claim the Octocat role in our [Discord server](https://discord.com/invite/9Byp7mWfMF) so plese put your Discord username and/or Discord ID into the pull request title/description.
-
 ## Self hosting
 
 Self hosting of the bot isn't disallowed but it is not recommended and no support will be provided for it. Also please do not host public versions of the bot, instead link any potential users to the main page @ karot.xyz.
